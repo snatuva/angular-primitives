@@ -2,9 +2,9 @@
   "name": "@sridhar_natuva/primitives",
   "version": "0.0.2",
   "peerDependencies": {
-    "@angular/common": "^21.0.0",
-    "@angular/core": "^21.0.0",
-    "@angular/cdk": "^21.0.0",
+    "@angular/common": "^21.0.2",
+    "@angular/core": "^21.0.2",
+    "@angular/cdk": "^21.0.2",
     "@angular/aria": "^21.0.5"
   },
   "dependencies": {
