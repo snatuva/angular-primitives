@@ -36,3 +36,4 @@ export class TooltipTriggerDirective {
         this.state.closeTooltip();
     }
 }
+

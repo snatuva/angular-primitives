@@ -1,6 +1,5 @@
 import {
     AfterContentInit,
-    ContentChild,
     contentChild,
     contentChildren,
     Directive,
@@ -16,6 +15,8 @@ import { TooltipContentDirective } from './tooltip-content.directive';
 import { TooltipTriggerDirective } from './tooltip-trigger.directive';
 import { Overlay } from '@angular/cdk/overlay';
 import { TooltipOverlay } from './tooltip.overlay';
+import { filter, fromEvent, Subject, takeUntil } from 'rxjs';
+import { DOCUMENT } from '@angular/common';
 
 @Directive({
     selector: '[apTooltip]',
@@ -23,25 +24,52 @@ import { TooltipOverlay } from './tooltip.overlay';
     providers: [TooltipState],
 })
 export class TooltipDirective implements AfterContentInit, OnDestroy {
+    private readonly tooltipId = `ap-tooltip-${Math.random()
+        .toString(36)
+        .slice(2)}`;
+
+    private readonly destroy$ = new Subject<void>();
     state = inject(TooltipState);
 
-    // Use decorator for single query
-    @ContentChild(TooltipContentDirective)
-    content!: TooltipContentDirective;
-
-    // Use signal for multiple
-    readonly triggers = contentChildren(TooltipTriggerDirective);
+    content = contentChild(TooltipContentDirective);
+    triggers = contentChildren(TooltipTriggerDirective);
 
     private overlay: TooltipOverlay | null = null;
 
     private readonly overlayService = inject(Overlay);
     private readonly vcr = inject(ViewContainerRef);
     private readonly injector = inject(Injector);
+    private readonly document = inject(DOCUMENT);
+
+    constructor() {
+        runInInjectionContext(this.injector, () => {
+            effect(() => {
+                if (!this.state.open()) {
+                    return;
+                }
+
+                const sub = fromEvent<KeyboardEvent>(
+                    this.document,
+                    'keydown'
+                )
+                    .pipe(
+                        filter(e => e.key === 'Escape'),
+                        takeUntil(this.destroy$)
+                    )
+                    .subscribe(() => {
+                        this.state.closeTooltip();
+                    });
+
+                // Cleanup when tooltip closes
+                return () => sub.unsubscribe();
+            });
+        });
+    }
 
     ngAfterContentInit(): void {
         runInInjectionContext(this.injector, () => {
             effect(() => {
-                const content = this.content;
+                const content = this.content();
                 const triggers = this.triggers();
 
                 // Early return if required elements are missing
@@ -57,6 +85,16 @@ export class TooltipDirective implements AfterContentInit, OnDestroy {
                         this.vcr,
                         origin
                     );
+
+                    this.overlay
+                        .keydownEvents()
+                        ?.pipe(
+                            filter(event => event.key === 'Escape'),
+                            takeUntil(this.destroy$)
+                        )
+                        .subscribe(() => {
+                            this.state.closeTooltip();
+                        });
                 }
 
                 // Toggle tooltip visibility
@@ -74,7 +112,7 @@ export class TooltipDirective implements AfterContentInit, OnDestroy {
 
         // Clear any existing content
         this.vcr.clear();
-
+        console.log('Showing tooltip');
         // Create and attach the tooltip content
         this.vcr.createEmbeddedView(content.template);
         // this.overlay.attach(viewRef);
@@ -89,5 +127,8 @@ export class TooltipDirective implements AfterContentInit, OnDestroy {
         this.vcr.clear();
         this.overlay?.destroy();
         this.overlay = null;
+
+        this.destroy$.next();
+        this.destroy$.complete();
     }
 }

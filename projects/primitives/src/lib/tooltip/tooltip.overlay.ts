@@ -5,6 +5,7 @@ import {
 } from '@angular/cdk/overlay';
 import { TemplateRef, ViewContainerRef } from '@angular/core';
 import { TemplatePortal } from '@angular/cdk/portal';
+import { Observable } from 'rxjs';
 
 export class TooltipOverlay {
     private overlayRef?: OverlayRef;
@@ -32,6 +33,10 @@ export class TooltipOverlay {
 
     destroy(): void {
         this.overlayRef?.dispose();
+    }
+
+    keydownEvents(): Observable<KeyboardEvent> | null {
+        return this.overlayRef?.keydownEvents() ?? null;
     }
 
     private createOverlay(): OverlayRef {
