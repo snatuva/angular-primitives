@@ -8,9 +8,6 @@ import { Tabs } from '@angular/aria/tabs';
     selector: '[apTabs]',
     standalone: true,
     exportAs: 'apTabs',
-    host: {
-        'role': 'tablist'
-    },
     providers: [
         TabsState
     ],
@@ -19,6 +16,8 @@ import { Tabs } from '@angular/aria/tabs';
     }]
 })
 export class TabsDirective {
+    // state = inject(TabsState);
+    // public activeTab = this.state.activeId;
     // @ContentChildren(TabTriggerDirective, { descendants: true })
     // private readonly triggers!: QueryList<TabTriggerDirective>;
 

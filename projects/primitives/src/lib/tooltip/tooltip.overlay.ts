@@ -1,7 +1,6 @@
 import {
     Overlay,
-    OverlayRef,
-    FlexibleConnectedPositionStrategy
+    OverlayRef
 } from '@angular/cdk/overlay';
 import { TemplateRef, ViewContainerRef } from '@angular/core';
 import { TemplatePortal } from '@angular/cdk/portal';

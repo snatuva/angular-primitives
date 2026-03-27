@@ -24,9 +24,6 @@ import { DOCUMENT } from '@angular/common';
     providers: [TooltipState],
 })
 export class TooltipDirective implements AfterContentInit, OnDestroy {
-    private readonly tooltipId = `ap-tooltip-${Math.random()
-        .toString(36)
-        .slice(2)}`;
 
     private readonly destroy$ = new Subject<void>();
     state = inject(TooltipState);
