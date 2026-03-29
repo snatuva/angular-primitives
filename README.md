@@ -1,59 +1,203 @@
-# AngularPrimitives
+# @snatuva/primitives
 
-This project was generated using [Angular CLI](https://github.com/angular/angular-cli) version 21.0.0.
+🚀 **Signals-first Angular primitives library** for building scalable, reusable UI components.
 
-## Development server
+Designed for modern Angular (v17+), this library provides low-level building blocks ("primitives") to help you create consistent, accessible, and high-performance UI systems.
 
-To start a local development server, run:
+---
 
-```bash
-ng serve
-```
-
-Once the server is running, open your browser and navigate to `http://localhost:4200/`. The application will automatically reload whenever you modify any of the source files.
-
-## Code scaffolding
-
-Angular CLI includes powerful code scaffolding tools. To generate a new component, run:
+## 📦 Installation
 
 ```bash
-ng generate component component-name
+npm install @snatuva/primitives
 ```
 
-For a complete list of available schematics (such as `components`, `directives`, or `pipes`), run:
+---
+
+## ⚡ Why this library?
+
+Most Angular component libraries are:
+
+* ❌ Heavy and opinionated
+* ❌ Hard to customize
+* ❌ Not aligned with modern Angular (Signals, standalone)
+
+**@snatuva/primitives focuses on:**
+
+* ✅ Lightweight, composable primitives
+* ✅ Signals-first architecture
+* ✅ Standalone component support
+* ✅ Tree-shakable design
+* ✅ Clean API for enterprise scalability
+
+---
+
+## 🧩 What are “Primitives”?
+
+Primitives are **low-level UI building blocks** (not full components).
+
+Instead of giving you a “ready-made UI”, this library gives:
+
+* Flexible foundations
+* Full control over styling and behavior
+* Better reusability across projects
+
+---
+
+## Tabs Usage
+
+### Directives
+
+- `apTabs` — root tabs scope/state provider.
+- `apTabList` — list container for tab triggers.
+  - Optional input: `orientation: 'horizontal' | 'vertical'` (default: 'horizontal')
+- `apTabTrigger` — interactive tab trigger.
+  - Required input: `tabId: string`
+  - Optional input: `disabled: boolean`
+- `apTabPanel` — panel region.
+  - Required input: `id: string` (used for ARIA relationships and state management)
+  - Optional input: `disabled: boolean`
+- `apTabContent` — structural directive to conditionally render active panel content.
+  - Required input: `tabId: string`
+
+### Import into your Angular app
+
+```ts
+import {
+  TabsDirective,
+  TabListDirective,
+  TabTriggerDirective,
+  TabPanelDirective
+} from '@snatuva/primitives';
+```
+
+---
+
+### Minimal usage
+
+```html
+<div apTabs>
+  <div apTabList>
+    <!-- Automatically gets role="tab", aria-selected, aria-controls -->
+    <button apTabTrigger tabId="overview">Overview</button>
+    <button apTabTrigger tabId="details">Details</button>
+  </div>
+
+  <!-- Automatically gets role="tabpanel", aria-labelledby, aria-hidden -->
+  <section apTabPanel id="overview">
+    <p>Overview content</p>
+  </section>
+
+  <section apTabPanel id="details">
+    <p>Details content</p>
+  </section>
+</div>
+```
+
+---
+
+## 🧠 Core Concepts
+
+### 1. Signals-first design
+
+* Uses Angular Signals for state management
+* Minimal RxJS usage (only where necessary)
+
+### 2. Standalone components
+
+* No NgModules required
+* Easy integration in modern Angular apps
+
+### 3. Composition over configuration
+
+* Build your own components using primitives
+* Avoid rigid APIs
+
+---
+
+## ♿ Accessibility (A11y)
+
+This library is designed with accessibility in mind:
+
+* Semantic HTML by default
+* Keyboard interaction support
+* ARIA best practices
+* Focus management patterns
+
+---
+
+## 📁 Project Structure
 
 ```bash
-ng generate --help
+projects/
+  primitives/
+    src/
+      lib/
+      public-api.ts
 ```
 
-## Building
+---
 
-To build the project run:
+## 🧪 Development
 
 ```bash
-ng build
+ng build primitives
 ```
 
-This will compile your project and store the build artifacts in the `dist/` directory. By default, the production build optimizes your application for performance and speed.
+---
 
-## Running unit tests
+## 📌 Versioning
 
-To execute unit tests with the [Karma](https://karma-runner.github.io) test runner, use the following command:
+This project follows semantic versioning:
 
-```bash
-ng test
-```
+* PATCH → bug fixes
+* MINOR → new features
+* MAJOR → breaking changes
 
-## Running end-to-end tests
+---
 
-For end-to-end (e2e) testing, run:
+## 🤝 Contributing
 
-```bash
-ng e2e
-```
+Contributions are welcome!
 
-Angular CLI does not come with an end-to-end testing framework by default. You can choose one that suits your needs.
+If you have ideas for:
 
-## Additional Resources
+* New primitives
+* Performance improvements
+* Accessibility enhancements
 
-For more information on using the Angular CLI, including detailed command references, visit the [Angular CLI Overview and Command Reference](https://angular.dev/tools/cli) page.
+Feel free to open an issue or PR.
+
+---
+
+## 📊 Roadmap
+
+* [ ] Core primitives expansion
+* [ ] Accessibility utilities
+* [ ] CDK integrations
+* [ ] Advanced composition patterns
+* [ ] Documentation site
+
+---
+
+## 👨‍💻 Author
+
+Developed by **Siva Sridhar Natuva**
+
+---
+
+## ⭐ Support
+
+If you find this useful:
+
+* Star the repo ⭐
+* Share with Angular community
+* Use it in your projects
+
+---
+
+## 🔍 Keywords
+
+Angular • Signals • UI Primitives • Component Library • Standalone Components • Design System
+
+---
