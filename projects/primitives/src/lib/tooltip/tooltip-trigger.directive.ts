@@ -10,14 +10,19 @@ import { TooltipState } from './tooltip.state';
     selector: '[apTooltipTrigger]',
     standalone: true,
     host: {
+        'role': 'button',
+        '[attr.tabindex]': '0',
         '(mouseenter)': 'onMouseEnter()',
         '(mouseleave)': 'onMouseLeave()',
         '(focus)': 'onFocus()',
         '(blur)': 'onBlur()',
+        '(keydown.escape)': 'onEscape()',
+        '[attr.aria-describedby]': 'state.tooltipId()',
+        '[attr.aria-expanded]': 'state.open()'
     }
 })
 export class TooltipTriggerDirective {
-    private readonly state = inject(TooltipState);
+    readonly state = inject(TooltipState);
     readonly element = inject(ElementRef<HTMLElement>);
 
     onMouseEnter() {
@@ -33,6 +38,10 @@ export class TooltipTriggerDirective {
     }
 
     onBlur() {
+        this.state.closeTooltip();
+    }
+
+    onEscape() {
         this.state.closeTooltip();
     }
 }

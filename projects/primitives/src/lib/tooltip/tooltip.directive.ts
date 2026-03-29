@@ -74,6 +74,8 @@ export class TooltipDirective implements AfterContentInit, OnDestroy {
                     return;
                 }
 
+                this.state.setTooltipId(content.tooltipId);
+
                 // Create overlay only once
                 if (!this.overlay) {
                     const origin = triggers[0].element.nativeElement;
