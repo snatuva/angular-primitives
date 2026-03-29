@@ -1,6 +1,6 @@
-import { Directive, ElementRef, Host, HostBinding, HostListener, inject, Input, input } from '@angular/core';
+import { Directive, ElementRef, HostBinding, inject, Input } from '@angular/core';
 import { FocusableOption } from '@angular/cdk/a11y';
-import { TabsState } from './tabs.state';
+import { TabPanel, TabsState } from './tabs.state';
 import { Tab } from '@angular/aria/tabs';
 
 @Directive({
@@ -10,6 +10,8 @@ import { Tab } from '@angular/aria/tabs';
         'role': 'tab',
         '[attr.aria-selected]': 'state.activeId() === tabId',
         '[attr.aria-disabled]': 'disabled',
+        '[tabindex]': 'state.activeId() === tabId ? "0" : "-1"',
+        '(keydown)': 'onKeydown($event)',
         '(click)': 'activate()'
     },
     providers: [
@@ -25,22 +27,36 @@ export class TabTriggerDirective implements FocusableOption {
     @Input() disabled = false;
     state = inject(TabsState);
     el = inject(ElementRef<HTMLElement>);
-    // constructor(@Host() private tabs: TabsDirective) { }
     activate(): void {
-        this.state.select(this.tabId);
+        this.state.activate(this.tabId);
+    }
+
+    onKeydown(event: KeyboardEvent) {
+        const active = this.state.panels().filter(t => !t.disabled);
+        const idx = active.findIndex(t => t.id === this.tabId);
+        let next: TabPanel | undefined;
+        switch (event.key) {
+
+            case 'ArrowRight':
+            case 'ArrowDown':
+                next = active[(idx + 1) % active.length]; break;
+            case 'ArrowLeft':
+            case 'ArrowUp':
+                next = active[(idx - 1 + active.length) % active.length]; break;
+            case 'Home': next = active[0]; break;
+            case 'End': next = active[active.length - 1]; break;
+        }
+
+        if (next) {
+            event.preventDefault();
+            this.state.activate(next.id);
+            this.focus();
+        }
     }
 
     focus(): void {
         this.el.nativeElement.focus();
     }
-
-    // @HostListener('keydown', ['$event'])
-    // onKeydown(event: KeyboardEvent) {
-    //     this.tabs.handleKeydown(event);
-    // }
-
-    @HostBinding('attr.tabindex')
-    tabindex = '-1';
 
     @HostBinding('attr.id')
     get id() {
@@ -50,10 +66,5 @@ export class TabTriggerDirective implements FocusableOption {
     @HostBinding('attr.aria-controls')
     get controls() {
         return `ap-panel-${this.tabId}`;
-    }
-
-
-    setActive(isActive: boolean): void {
-        this.tabindex = isActive ? '0' : '-1';
     }
 }

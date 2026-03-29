@@ -42,11 +42,12 @@ import {
 
 - `apTabs` — root tabs scope/state provider.
 - `apTabList` — list container for tab triggers.
+  - Optional input: `orientation: 'horizontal' | 'vertical'` (default: 'horizontal')
 - `apTabTrigger` — interactive tab trigger.
   - Required input: `tabId: string`
   - Optional input: `disabled: boolean`
 - `apTabPanel` — panel region.
-  - Input: `id` (forwarded to ARIA tab panel primitive value)
+  - Required input: `id: string` (used for ARIA relationships and state management)
   - Optional input: `disabled: boolean`
 - `apTabContent` — structural directive to conditionally render active panel content.
   - Required input: `tabId: string`
@@ -62,11 +63,11 @@ import {
   </div>
 
   <!-- Automatically gets role="tabpanel", aria-labelledby, aria-hidden -->
-  <section apTabPanel id="overview" value="overview">
+  <section apTabPanel id="overview">
     <p>Overview content</p>
   </section>
 
-  <section apTabPanel id="details" value="details">
+  <section apTabPanel id="details">
     <p>Details content</p>
   </section>
 </div>

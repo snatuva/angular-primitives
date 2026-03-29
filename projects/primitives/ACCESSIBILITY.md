@@ -20,7 +20,7 @@ The tabs component implements the [WAI-ARIA Tabs pattern](https://www.w3.org/WAI
 | Directive | ARIA Role | Key Attributes |
 |-----------|-----------|-----------------|
 | `apTabs` | (container) | — |
-| `apTabList` | `tablist` | — |
+| `apTabList` | `tablist` | `aria-orientation` (horizontal/vertical) |
 | `apTabTrigger` | `tab` | `aria-selected`, `aria-controls`, `aria-disabled` |
 | `apTabPanel` | `tabpanel` | `aria-labelledby`, `aria-hidden` |
 
@@ -40,15 +40,17 @@ The tabs component implements the [WAI-ARIA Tabs pattern](https://www.w3.org/WAI
   </div>
 
   <!-- Tab panels with lazy-loaded content -->
-  <div apTabPanel id="profile" value="profile" class="tab-panel">
+  <div apTabPanel id="profile" class="tab-panel">
     <p>Profile content goes here</p>
   </div>
 
-  <div apTabPanel id="settings" value="settings" class="tab-panel">
+  <div apTabPanel id="settings" class="tab-panel">
     <p>Settings content goes here</p>
   </div>
 </div>
 ```
+
+**Note:** The `apTabList` directive supports an `orientation` input for vertical tabs: `<div apTabList orientation="vertical">`.
 
 ### Keyboard Shortcuts
 

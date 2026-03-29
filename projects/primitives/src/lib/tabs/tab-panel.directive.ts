@@ -8,12 +8,10 @@ import { TabPanel } from '@angular/aria/tabs';
     exportAs: 'apTabPanel',
     host: {
         'role': 'tabpanel',
-        '(keydown)': 'onKeydown($event)',
-        // Use the ID from the injected ariaPanel
-        '[attr.aria-labelledby]': '`ap-tab-${ariaPanel.value}`',
-        '[attr.id]': '`ap-panel-${ariaPanel.value}`',
+        '[attr.aria-labelledby]': '`ap-tab-${ariaPanel.value()}`',
+        '[attr.id]': '`ap-panel-${ariaPanel.value()}`',
         '[style.display]': 'isActive() ? "block" : "none"',
-        '[attr.aria-hidden]': '!isActive()'
+        '[hidden]': '!isActive()'
     },
     hostDirectives: [{
         directive: TabPanel,
@@ -42,12 +40,10 @@ export class TabPanelDirective implements OnInit, OnDestroy {
     }
 
     isActive(): boolean {
-        // 3. Compare the active state against the primitive's value
         return this.state.activeId() === this.ariaPanel.value();
     }
 
     onKeydown(event: KeyboardEvent): void {
-        // Allow escape key to work within panels
         if (event.key === 'Escape') {
             event.stopPropagation();
         }

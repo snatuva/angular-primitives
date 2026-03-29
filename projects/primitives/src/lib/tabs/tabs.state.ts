@@ -33,7 +33,7 @@ export class TabsState {
         }
     }
 
-    select(id: string): void {
+    activate(id: string): void {
         const panel = this._panels().find(p => p.id === id && !p.disabled);
         if (panel) {
             this._activeId.set(id);

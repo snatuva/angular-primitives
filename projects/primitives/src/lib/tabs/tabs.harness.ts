@@ -1,4 +1,4 @@
-import { ComponentHarness, HarnessPredicate } from '@angular/cdk/testing';
+import { ComponentHarness } from '@angular/cdk/testing';
 
 export class TabTriggerHarness extends ComponentHarness {
     static hostSelector = '[apTabTrigger]';
