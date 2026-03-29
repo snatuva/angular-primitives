@@ -1,6 +1,6 @@
 {
   "name": "@snatuva/primitives",
-  "version": "0.1.9",
+  "version": "0.1.10",
   "description": "Headless, directive-first UI primitives for Angular",
   "keywords": [
     "angular",
