@@ -1,42 +1,50 @@
 # @snatuva/primitives
 
-Headless, directive-first Angular UI primitives focused on behavior, accessibility,
-and composability.
+🚀 **Signals-first Angular primitives library** for building scalable, reusable UI components.
 
-This library currently includes:
+Designed for modern Angular (v21+), this library provides low-level building blocks ("primitives") to help you create consistent, accessible, and high-performance UI systems.
 
-- Tabs primitives
-- Tooltip primitives
+---
 
-## Philosophy
-
-- **Headless**: no styling is imposed by the library.
-- **Directive-first**: compose behavior into your own markup.
-- **Scoped state**: each primitive root creates an isolated state scope.
-- **Accessible by default**: ARIA semantics are wired into directives.
-
-## Installation
+## 📦 Installation
 
 ```bash
 npm install @snatuva/primitives
 ```
 
-## Exports
+---
 
-```ts
-import {
-  TabsDirective,
-  TabListDirective,
-  TabTriggerDirective,
-  TabPanelDirective,
-  TabContentDirective,
-  TooltipDirective,
-  TooltipTriggerDirective,
-  TooltipContentDirective,
-} from '@snatuva/primitives';
-```
+## ⚡ Why this library?
 
-## Tabs
+Most Angular component libraries are:
+
+* ❌ Heavy and opinionated
+* ❌ Hard to customize
+* ❌ Not aligned with modern Angular (Signals, standalone)
+
+**@snatuva/primitives focuses on:**
+
+* ✅ Lightweight, composable primitives
+* ✅ Signals-first architecture
+* ✅ Standalone component support
+* ✅ Tree-shakable design
+* ✅ Clean API for enterprise scalability
+
+---
+
+## 🧩 What are “Primitives”?
+
+Primitives are **low-level UI building blocks** (not full components).
+
+Instead of giving you a “ready-made UI”, this library gives:
+
+* Flexible foundations
+* Full control over styling and behavior
+* Better reusability across projects
+
+---
+
+## Tabs Usage
 
 ### Directives
 
@@ -51,6 +59,19 @@ import {
   - Optional input: `disabled: boolean`
 - `apTabContent` — structural directive to conditionally render active panel content.
   - Required input: `tabId: string`
+
+### Import into your Angular app
+
+```ts
+import {
+  TabsDirective,
+  TabListDirective,
+  TabTriggerDirective,
+  TabPanelDirective
+} from '@snatuva/primitives';
+```
+
+---
 
 ### Minimal usage
 
@@ -73,144 +94,110 @@ import {
 </div>
 ```
 
-### Behavior notes
+---
 
-- The first registered panel is selected by default.
-- Selecting a disabled tab is ignored.
-- When an active panel is removed, selection falls back to the next available panel.
+## 🧠 Core Concepts
 
-### Accessibility (ARIA)
+### 1. Signals-first design
 
-✅ **Automatic - No manual configuration needed!**
+* Uses Angular Signals for state management
+* Minimal RxJS usage (only where necessary)
 
-**Built-in ARIA attributes:**
-- `apTabList` → `role="tablist"`
-- `apTabTrigger` → `role="tab"`, `aria-selected="true|false"`, `aria-controls="[panel-id]"`, `tabindex` management
-- `apTabPanel` → `role="tabpanel"`, `aria-labelledby="[trigger-id]"`, `aria-hidden="true|false"`, `id` auto-generated
+### 2. Standalone components
 
-**Built-in keyboard navigation:**
-- <kbd>Arrow Right</kbd> / <kbd>Arrow Left</kbd> — Switch between tabs
-- <kbd>Arrow Down</kbd> / <kbd>Arrow Up</kbd> — Switch between tabs
-- <kbd>Home</kbd> — Jump to first tab
-- <kbd>End</kbd> — Jump to last tab
-- <kbd>Tab</kbd> — Focus management with roving tabindex
+* No NgModules required
+* Easy integration in modern Angular apps
 
-**CSS Styling Example:**
+### 3. Composition over configuration
 
-```css
-/* Target active tab */
-[apTabTrigger][aria-selected='true'] {
-  border-bottom: 2px solid #2196f3;
-  font-weight: bold;
-}
+* Build your own components using primitives
+* Avoid rigid APIs
 
-/* Target disabled tab */
-[apTabTrigger][aria-disabled='true'] {
-  opacity: 0.5;
-  cursor: not-allowed;
-}
+---
 
-/* Style tab panels */
-[apTabPanel] {
-  padding: 20px;
-}
+## ♿ Accessibility (A11y)
 
-/* Hide inactive panels */
-[apTabPanel][aria-hidden='true'] {
-  display: none;
-}
+This library is designed with accessibility in mind:
+
+* Semantic HTML by default
+* Keyboard interaction support
+* ARIA best practices
+* Focus management patterns
+
+---
+
+## 📁 Project Structure
+
+```bash
+projects/
+  primitives/
+    src/
+      lib/
+      public-api.ts
 ```
 
-## Tooltip
+---
 
-### Directives
-
-- `apTooltip` — root tooltip scope/state provider.
-- `apTooltipTrigger` — element that opens/closes tooltip on pointer/focus interactions.
-- `apTooltipContent` — template for tooltip content.
-
-### Minimal usage
-
-```html
-<div apTooltip>
-  <!-- Automatically gets role="button", aria-describedby, aria-expanded, tabindex -->
-  <button apTooltipTrigger type="button">Hover or focus me</button>
-
-  <!-- Automatically gets role="tooltip" and unique id -->
-  <ng-template apTooltipContent>
-    <span>Helpful tooltip content</span>
-  </ng-template>
-</div>
-```
-
-### Behavior notes
-
-- Opens on `mouseenter` and `focus`.
-- Closes on `mouseleave`, `blur`, or <kbd>Escape</kbd>.
-
-### Accessibility (ARIA)
-
-✅ **Automatic - No manual configuration needed!**
-
-**Built-in ARIA attributes:**
-- `apTooltipContent` → `role="tooltip"`, unique `id` auto-generated
-- `apTooltipTrigger` → `role="button"`, `aria-describedby="[tooltip-id]"`, `aria-expanded="true|false"`, `tabindex="0"`
-
-**Built-in keyboard navigation:**
-- <kbd>Enter</kbd> / <kbd>Space</kbd> — Open tooltip (if not already open)
-- <kbd>Escape</kbd> — Close tooltip
-- <kbd>Tab</kbd> — Move focus (closes tooltip automatically on blur)
-- Mouse hover / Focus events — Auto show/hide
-
-**Best Practices:**
-- Use tooltips for supplemental information only.
-- Don't rely on tooltips for critical information.
-- Ensure tooltip content is concise and helpful.
-
-**CSS Styling Example:**
-
-```css
-/* Style tooltip trigger */
-[apTooltipTrigger] {
-  cursor: help;
-  text-decoration: underline dotted;
-}
-
-/* Style tooltip content */
-[apTooltipContent] {
-  background: #333;
-  color: #fff;
-  padding: 8px 12px;
-  border-radius: 4px;
-  font-size: 12px;
-  max-width: 200px;
-  z-index: 1000;
-}
-
-/* Add arrow pointer (optional) */
-[apTooltipContent]::before {
-  content: '';
-  position: absolute;
-  bottom: -4px;
-  left: 50%;
-  transform: translateX(-50%);
-  width: 8px;
-  height: 8px;
-  background: #333;
-  clip-path: polygon(50% 0%, 0% 100%, 100% 100%);
-}
-```
-
-## Development
-
-### Build library
+## 🧪 Development
 
 ```bash
 ng build primitives
 ```
 
-### Run tests
+---
 
-```bash
-ng test
-```
+## 📌 Versioning
+
+This project follows semantic versioning:
+
+* PATCH → bug fixes
+* MINOR → new features
+* MAJOR → breaking changes
+
+---
+
+## 🤝 Contributing
+
+Contributions are welcome!
+
+If you have ideas for:
+
+* New primitives
+* Performance improvements
+* Accessibility enhancements
+
+Feel free to open an issue or PR.
+
+---
+
+## 📊 Roadmap
+
+* [ ] Core primitives expansion
+* [ ] Accessibility utilities
+* [ ] CDK integrations
+* [ ] Advanced composition patterns
+* [ ] Documentation site
+
+---
+
+## 👨‍💻 Author
+
+Developed by **Siva Sridhar Natuva**
+
+---
+
+## ⭐ Support
+
+If you find this useful:
+
+* Star the repo ⭐
+* Share with Angular community
+* Use it in your projects
+
+---
+
+## 🔍 Keywords
+
+Angular • Signals • UI Primitives • Component Library • Standalone Components • Design System
+
+---
