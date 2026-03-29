@@ -1,5 +1,5 @@
 {
-  "name": "@sridhar_natuva/primitives",
+  "name": "@snatuva/primitives",
   "version": "0.0.2",
   "peerDependencies": {
     "@angular/common": "^21.0.2",

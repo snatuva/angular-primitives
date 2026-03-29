@@ -1,4 +1,4 @@
-# @sridhar_natuva/primitives
+# @snatuva/primitives
 
 Headless, directive-first Angular UI primitives focused on behavior, accessibility,
 and composability.
@@ -18,7 +18,7 @@ This library currently includes:
 ## Installation
 
 ```bash
-npm install @sridhar_natuva/primitives
+npm install @snatuva/primitives
 ```
 
 ## Exports
@@ -33,7 +33,7 @@ import {
   TooltipDirective,
   TooltipTriggerDirective,
   TooltipContentDirective,
-} from '@sridhar_natuva/primitives';
+} from '@snatuva/primitives';
 ```
 
 ## Tabs
