@@ -1,7 +1,6 @@
 import {
     AfterContentInit,
     contentChild,
-    contentChildren,
     Directive,
     effect,
     inject,
@@ -24,110 +23,77 @@ import { DOCUMENT } from '@angular/common';
     providers: [TooltipState],
 })
 export class TooltipDirective implements AfterContentInit, OnDestroy {
-
-    private readonly destroy$ = new Subject<void>();
     state = inject(TooltipState);
+    private overlay = inject(Overlay);
+    private vcr = inject(ViewContainerRef);
+    private injector = inject(Injector);
+    private document = inject(DOCUMENT);
 
-    content = contentChild(TooltipContentDirective);
-    triggers = contentChildren(TooltipTriggerDirective);
+    private tooltipOverlay?: TooltipOverlay;
+    private destroy$ = new Subject<void>();
 
-    private overlay: TooltipOverlay | null = null;
+    contentTemplate = contentChild(TooltipContentDirective);
+    trigger = contentChild(TooltipTriggerDirective);
 
-    private readonly overlayService = inject(Overlay);
-    private readonly vcr = inject(ViewContainerRef);
-    private readonly injector = inject(Injector);
-    private readonly document = inject(DOCUMENT);
+    ngAfterContentInit() {
+        console.log('contentTemplate', this.contentTemplate());
+        console.log('trigger', this.trigger());
+        console.log('templateRef', this.contentTemplate()?.templateRef);
+        console.log('vcr', this.contentTemplate()?.vcr);
 
-    constructor() {
+
+        const content = this.contentTemplate();
+        if (content) {
+            this.state.setTooltipId(content.tooltipId);
+        }
+
+        fromEvent<KeyboardEvent>(this.document, 'keydown')
+            .pipe(
+                filter(event => event.key === 'Escape'),
+                takeUntil(this.destroy$)
+            )
+            .subscribe(() => this.state.closeTooltip());
+
         runInInjectionContext(this.injector, () => {
             effect(() => {
-                if (!this.state.open()) {
-                    return;
-                }
+                const isOpen = this.state.open();
+                const template = this.contentTemplate()?.templateRef;
+                const triggerElement = this.trigger()?.element.nativeElement;
 
-                const sub = fromEvent<KeyboardEvent>(
-                    this.document,
-                    'keydown'
-                )
-                    .pipe(
-                        filter(e => e.key === 'Escape'),
-                        takeUntil(this.destroy$)
-                    )
-                    .subscribe(() => {
-                        this.state.closeTooltip();
-                    });
-
-                // Cleanup when tooltip closes
-                return () => sub.unsubscribe();
-            });
-        });
-    }
-
-    ngAfterContentInit(): void {
-        runInInjectionContext(this.injector, () => {
-            effect(() => {
-                const content = this.content();
-                const triggers = this.triggers();
-
-                // Early return if required elements are missing
-                if (!content || triggers.length === 0) {
-                    return;
-                }
-
-                this.state.setTooltipId(content.tooltipId);
-
-                // Create overlay only once
-                if (!this.overlay) {
-                    const origin = triggers[0].element.nativeElement;
-                    this.overlay = new TooltipOverlay(
-                        this.overlayService,
-                        this.vcr,
-                        origin
-                    );
-
-                    this.overlay
-                        .keydownEvents()
-                        ?.pipe(
-                            filter(event => event.key === 'Escape'),
-                            takeUntil(this.destroy$)
-                        )
-                        .subscribe(() => {
-                            this.state.closeTooltip();
-                        });
-                }
-
-                // Toggle tooltip visibility
-                if (this.state.open()) {
-                    this.showTooltip(content);
-                } else {
+                // Read all signals first, then act — avoids partial reactive state
+                if (isOpen && template && triggerElement) {
+                    this.showTooltip();
+                } else if (!isOpen) {
                     this.hideTooltip();
                 }
             });
         });
     }
 
-    private showTooltip(content: TooltipContentDirective): void {
-        if (!this.overlay) return;
+    private showTooltip() {
+        const content = this.contentTemplate();
+        const triggerElement = this.trigger()?.element.nativeElement;
 
-        // Clear any existing content
-        this.vcr.clear();
-        console.log('Showing tooltip');
-        // Create and attach the tooltip content
-        this.vcr.createEmbeddedView(content.template);
-        // this.overlay.attach(viewRef);
+        if (!content || !triggerElement) return;
+
+        if (!this.tooltipOverlay) {
+            this.tooltipOverlay = new TooltipOverlay(this.overlay, triggerElement);
+        }
+
+        this.tooltipOverlay.attach(content.templateRef, content.vcr); // ✅
+        this.tooltipOverlay.setAttributes({
+            role: 'tooltip',
+            id: this.state.tooltipId() ?? 'tooltip'
+        });
     }
 
-    private hideTooltip(): void {
-        this.vcr.clear();
-        this.overlay?.detach();
-    }
-
-    ngOnDestroy(): void {
-        this.vcr.clear();
-        this.overlay?.destroy();
-        this.overlay = null;
-
+    ngOnDestroy() {
         this.destroy$.next();
         this.destroy$.complete();
+        this.tooltipOverlay?.destroy();
+    }
+
+    private hideTooltip() {
+        this.tooltipOverlay?.detach();
     }
 }

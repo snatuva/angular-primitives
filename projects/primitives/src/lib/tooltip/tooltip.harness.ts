@@ -8,6 +8,11 @@ export class TooltipTriggerHarness extends ComponentHarness {
         return host.getAttribute('aria-describedby');
     }
 
+    async getAriaExpanded(): Promise<string | null> {
+        const host = await this.host();
+        return host.getAttribute('aria-expanded');
+    }
+
     async click(): Promise<void> {
         const host = await this.host();
         return host.click();
@@ -22,10 +27,20 @@ export class TooltipTriggerHarness extends ComponentHarness {
         const host = await this.host();
         return host.blur();
     }
+
+    async hover(): Promise<void> {
+        const host = await this.host();
+        await host.hover();
+    }
+
+    async unhover(): Promise<void> {
+        const host = await this.host();
+        await host.mouseAway();
+    }
 }
 
 export class TooltipContentHarness extends ComponentHarness {
-    static hostSelector = '[apTooltipContent]';
+    static hostSelector = '.tooltip-content';
 
     async getRole(): Promise<string | null> {
         const host = await this.host();
@@ -49,15 +64,11 @@ export class TooltipHarness extends ComponentHarness {
         return this.locatorFor(TooltipTriggerHarness)();
     }
 
-    async getContent(): Promise<TooltipContentHarness> {
-        return this.locatorFor(TooltipContentHarness)();
-    }
-
     async isOpen(): Promise<boolean> {
-        // Check if content is present or visible
+        // Check if tooltip content exists in overlay
         try {
-            const content = await this.getContent();
-            return true; // If found, assume open
+            const tooltipElements = document.querySelectorAll('[role="tooltip"]');
+            return tooltipElements.length > 0;
         } catch {
             return false;
         }

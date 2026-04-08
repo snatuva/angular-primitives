@@ -11,18 +11,26 @@ export class TooltipOverlay {
 
     constructor(
         private readonly overlay: Overlay,
-        private readonly vcr: ViewContainerRef,
         private readonly origin: HTMLElement
     ) { }
 
-    attach(template: TemplateRef<unknown>): void {
+    // tooltip.overlay.ts
+    attach(template: TemplateRef<unknown>, vcr: ViewContainerRef): void {
         if (!this.overlayRef) {
             this.overlayRef = this.createOverlay();
         }
-
         if (!this.overlayRef.hasAttached()) {
-            const portal = new TemplatePortal(template, this.vcr);
+            const portal = new TemplatePortal(template, vcr); // ✅ correct vcr
             this.overlayRef.attach(portal);
+        }
+    }
+
+    setAttributes(attrs: Record<string, string>) {
+        if (this.overlayRef) {
+            const element = this.overlayRef.overlayElement;
+            for (const [key, value] of Object.entries(attrs)) {
+                element.setAttribute(key, value);
+            }
         }
     }
 
@@ -56,13 +64,42 @@ export class TooltipOverlay {
                         overlayX: 'center',
                         overlayY: 'top',
                         offsetY: 8
+                    },
+                    {
+                        originX: 'start',
+                        originY: 'top',
+                        overlayX: 'start',
+                        overlayY: 'bottom',
+                        offsetY: -8
+                    },
+                    {
+                        originX: 'end',
+                        originY: 'top',
+                        overlayX: 'end',
+                        overlayY: 'bottom',
+                        offsetY: -8
+                    },
+                    {
+                        originX: 'start',
+                        originY: 'bottom',
+                        overlayX: 'start',
+                        overlayY: 'top',
+                        offsetY: 8
+                    },
+                    {
+                        originX: 'end',
+                        originY: 'bottom',
+                        overlayX: 'end',
+                        overlayY: 'top',
+                        offsetY: 8
                     }
                 ]);
 
         return this.overlay.create({
             positionStrategy,
             scrollStrategy: this.overlay.scrollStrategies.reposition(),
-            hasBackdrop: false
+            hasBackdrop: false,
+            panelClass: 'ap-tooltip-panel'
         });
     }
 }
