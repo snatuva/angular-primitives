@@ -253,8 +253,8 @@ Developed by **Siva Sridhar Natuva**
 If you find this useful:
 
 * Star the repo ⭐
-* Share with Angular community
-* Use it in your projects
+* Share with Angular community.
+* Use it in your projects.
 
 ---
 
