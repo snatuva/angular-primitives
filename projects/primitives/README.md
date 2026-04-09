@@ -35,7 +35,10 @@ Most Angular component libraries are:
 ## 🧩 What are “Primitives”?
 
 Primitives are **low-level UI building blocks** (not full components).
+Currently available primitives:
 
+* **Tabs**: Flexible tab navigation with accessibility
+* **Tooltip**: Overlay-based tooltips with positioning
 Instead of giving you a “ready-made UI”, this library gives:
 
 * Flexible foundations
@@ -93,6 +96,63 @@ import {
   </section>
 </div>
 ```
+
+---
+
+## Tooltip Usage
+
+### Directives
+
+- `apTooltip` — root tooltip scope/state provider.
+- `apTooltipTrigger` — interactive trigger element.
+  - Optional inputs: `showDelay: number` (default: 300ms), `hideDelay: number` (default: 150ms)
+- `apTooltipContent` — structural directive on `ng-template` for tooltip content.
+  - Optional input: `tooltipId: string` (auto-generated if not provided)
+
+### Import into your Angular app
+
+```ts
+import {
+  TooltipDirective,
+  TooltipTriggerDirective,
+  TooltipContentDirective
+} from '@snatuva/primitives';
+```
+
+---
+
+### Minimal usage
+
+```html
+<div apTooltip>
+  <span apTooltipTrigger>Info</span>
+  <ng-template apTooltipContent>
+    This is a tooltip with helpful information.
+  </ng-template>
+</div>
+```
+
+### With custom ID and delays
+
+```html
+<div apTooltip>
+  <button apTooltipTrigger [showDelay]="500" [hideDelay]="200">
+    Hover me
+  </button>
+  <ng-template apTooltipContent [tooltipId]="'custom-tooltip'">
+    <div>Custom tooltip content</div>
+  </ng-template>
+</div>
+```
+
+### Features
+
+- **Automatic positioning**: Uses Angular CDK Overlay for flexible positioning
+- **Accessibility**: ARIA attributes (`role="tooltip"`, `aria-describedby`, `aria-expanded`)
+- **Keyboard support**: Focus/blur, Escape to close
+- **Mouse interactions**: Hover to show, leave to hide
+- **Configurable delays**: Customize show/hide timing
+- **Unique IDs**: Auto-generated or custom tooltip IDs
 
 ---
 
@@ -172,6 +232,8 @@ Feel free to open an issue or PR.
 
 ## 📊 Roadmap
 
+* [x] Tabs primitive
+* [x] Tooltip primitive
 * [ ] Core primitives expansion
 * [ ] Accessibility utilities
 * [ ] CDK integrations
@@ -198,6 +260,6 @@ If you find this useful:
 
 ## 🔍 Keywords
 
-Angular • Signals • UI Primitives • Component Library • Standalone Components • Design System
+Angular • Signals • UI Primitives • Component Library • Standalone Components • Design System • Tabs • Tooltip • Accessibility
 
 ---
