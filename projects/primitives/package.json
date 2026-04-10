@@ -10,5 +10,23 @@
   "dependencies": {
     "tslib": "^2.3.0"
   },
-  "sideEffects": false
+  "author": "Siva Sridhar Natuva <snatuva@outlook.com>",
+  "license": "MIT",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/snatuva/angular-primitives.git"
+  },
+  "bugs": {
+    "url": "https://github.com/snatuva/angular-primitives/issues"
+  },
+  "homepage": "https://github.com/snatuva/angular-primitives/blob/main/README.md",
+  "sideEffects": false,
+  "keywords": [
+    "Angular",
+    "Signals",
+    "UI Primitives",
+    "Component Library",
+    "Standalone Components",
+    "Design System"
+  ]
 }
