@@ -28,5 +28,8 @@
     "Component Library",
     "Standalone Components",
     "Design System"
-  ]
+  ],
+  "publishConfig": {
+  "provenance": true
+}
 }
