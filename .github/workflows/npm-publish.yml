@@ -6,6 +6,10 @@ name: Node.js Package
 on:
   release:
     types: [created]
+  push:
+    branches:
+      - main
+  workflow_dispatch: # This is the magic line that enables the button
 
 jobs:
   build:
