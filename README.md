@@ -1,203 +1,175 @@
 # @snatuva/primitives
 
-🚀 **Signals-first Angular primitives library** for building scalable, reusable UI components.
+> Signals-first Angular primitives for building scalable, accessible UI systems.
 
-Designed for modern Angular (v17+), this library provides low-level building blocks ("primitives") to help you create consistent, accessible, and high-performance UI systems.
+[![npm version](https://img.shields.io/npm/v/@snatuva/primitives)](https://www.npmjs.com/package/@snatuva/primitives)
+[![Angular](https://img.shields.io/badge/Angular-v17%2B-dd0031)](https://angular.dev)
+[![license](https://img.shields.io/npm/l/@snatuva/primitives)](./LICENSE)
 
 ---
 
-## 📦 Installation
+## Overview
+
+Most Angular component libraries hand you finished UI. `@snatuva/primitives` hands you the foundations — unstyled, composable, and accessible building blocks you wire together your way.
+
+No `NgModule`. No fighting the design system. Just clean primitives built on Angular Signals.
+
+---
+
+## Installation
 
 ```bash
 npm install @snatuva/primitives
 ```
 
----
-
-## ⚡ Why this library?
-
-Most Angular component libraries are:
-
-* ❌ Heavy and opinionated
-* ❌ Hard to customize
-* ❌ Not aligned with modern Angular (Signals, standalone)
-
-**@snatuva/primitives focuses on:**
-
-* ✅ Lightweight, composable primitives
-* ✅ Signals-first architecture
-* ✅ Standalone component support
-* ✅ Tree-shakable design
-* ✅ Clean API for enterprise scalability
+Requires **Angular 17+**.
 
 ---
 
-## 🧩 What are “Primitives”?
+## Why primitives?
 
-Primitives are **low-level UI building blocks** (not full components).
-
-Instead of giving you a “ready-made UI”, this library gives:
-
-* Flexible foundations
-* Full control over styling and behavior
-* Better reusability across projects
+| Traditional component libraries | `@snatuva/primitives` |
+|---|---|
+| Opinionated styles, hard to override | Zero styles — you own the look |
+| Bulky bundles with unused components | Tree-shakable, import only what you use |
+| RxJS-heavy internal state | Angular Signals throughout |
+| NgModule-based | Standalone-first |
 
 ---
 
-## Tabs Usage
+## Primitives
 
-### Directives
+### Tabs
 
-- `apTabs` — root tabs scope/state provider.
-- `apTabList` — list container for tab triggers.
-  - Optional input: `orientation: 'horizontal' | 'vertical'` (default: 'horizontal')
-- `apTabTrigger` — interactive tab trigger.
-  - Required input: `tabId: string`
-  - Optional input: `disabled: boolean`
-- `apTabPanel` — panel region.
-  - Required input: `id: string` (used for ARIA relationships and state management)
-  - Optional input: `disabled: boolean`
-- `apTabContent` — structural directive to conditionally render active panel content.
-  - Required input: `tabId: string`
+A fully accessible tabs implementation following the [ARIA tabs pattern](https://www.w3.org/WAI/ARIA/apg/patterns/tabs/).
 
-### Import into your Angular app
+**Directives**
+
+| Directive | Description | Inputs |
+|---|---|---|
+| `apTabs` | Root scope and state provider | — |
+| `apTabList` | Container for tab triggers | `orientation?: 'horizontal' \| 'vertical'` (default: `'horizontal'`) |
+| `apTabTrigger` | Interactive tab button | `tabId: string`, `disabled?: boolean` |
+| `apTabPanel` | Panel region | `id: string`, `disabled?: boolean` |
+| `apTabContent` | Structural directive — conditionally renders active panel | `tabId: string` |
+
+**Import**
 
 ```ts
 import {
   TabsDirective,
   TabListDirective,
   TabTriggerDirective,
-  TabPanelDirective
+  TabPanelDirective,
 } from '@snatuva/primitives';
 ```
 
----
-
-### Minimal usage
+**Usage**
 
 ```html
 <div apTabs>
   <div apTabList>
-    <!-- Automatically gets role="tab", aria-selected, aria-controls -->
     <button apTabTrigger tabId="overview">Overview</button>
     <button apTabTrigger tabId="details">Details</button>
+    <button apTabTrigger tabId="settings" [disabled]="true">Settings</button>
   </div>
 
-  <!-- Automatically gets role="tabpanel", aria-labelledby, aria-hidden -->
   <section apTabPanel id="overview">
     <p>Overview content</p>
   </section>
-
   <section apTabPanel id="details">
     <p>Details content</p>
+  </section>
+  <section apTabPanel id="settings">
+    <p>Settings content</p>
   </section>
 </div>
 ```
 
----
+ARIA attributes (`role="tab"`, `aria-selected`, `aria-controls`, `role="tabpanel"`, `aria-labelledby`, `aria-hidden`) are applied automatically.
 
-## 🧠 Core Concepts
+**Vertical tabs**
 
-### 1. Signals-first design
+```html
+<div apTabs>
+  <div apTabList orientation="vertical">
+    <button apTabTrigger tabId="profile">Profile</button>
+    <button apTabTrigger tabId="billing">Billing</button>
+  </div>
+  <section apTabPanel id="profile">...</section>
+  <section apTabPanel id="billing">...</section>
+</div>
+```
 
-* Uses Angular Signals for state management
-* Minimal RxJS usage (only where necessary)
+**Conditional rendering with `apTabContent`**
 
-### 2. Standalone components
+Use `apTabContent` to defer rendering panel content until the tab is active:
 
-* No NgModules required
-* Easy integration in modern Angular apps
-
-### 3. Composition over configuration
-
-* Build your own components using primitives
-* Avoid rigid APIs
-
----
-
-## ♿ Accessibility (A11y)
-
-This library is designed with accessibility in mind:
-
-* Semantic HTML by default
-* Keyboard interaction support
-* ARIA best practices
-* Focus management patterns
-
----
-
-## 📁 Project Structure
-
-```bash
-projects/
-  primitives/
-    src/
-      lib/
-      public-api.ts
+```html
+<section apTabPanel id="analytics">
+  <ng-template apTabContent tabId="analytics">
+    <!-- Only rendered when this panel is active -->
+    <app-analytics-chart />
+  </ng-template>
+</section>
 ```
 
 ---
 
-## 🧪 Development
+## Accessibility
 
-```bash
-ng build primitives
-```
+Every primitive is built to satisfy ARIA authoring practices out of the box:
 
----
-
-## 📌 Versioning
-
-This project follows semantic versioning:
-
-* PATCH → bug fixes
-* MINOR → new features
-* MAJOR → breaking changes
+- Semantic roles applied automatically
+- Keyboard navigation (Arrow keys, Home, End, Tab)
+- `aria-selected`, `aria-controls`, `aria-labelledby`, `aria-hidden` wired up
+- Focus management handled internally
+- Disabled states respected by both keyboard and assistive technology
 
 ---
 
-## 🤝 Contributing
+## Core design principles
 
-Contributions are welcome!
+**Signals-first.** State is managed with Angular Signals. RxJS is used only where it is the right tool, not the default.
 
-If you have ideas for:
+**Standalone.** No `NgModule` required. Drop a directive into any standalone component.
 
-* New primitives
-* Performance improvements
-* Accessibility enhancements
+**Headless.** Primitives ship with zero styles. You apply your design system on top — CSS, Tailwind, or anything else.
 
-Feel free to open an issue or PR.
+**Composable.** Primitives are scoped and self-contained. Nest them, extend them, or combine them without fighting internal abstractions.
 
----
-
-## 📊 Roadmap
-
-* [ ] Core primitives expansion
-* [ ] Accessibility utilities
-* [ ] CDK integrations
-* [ ] Advanced composition patterns
-* [ ] Documentation site
+**Tree-shakable.** Only the primitives you import end up in your bundle.
 
 ---
 
-## 👨‍💻 Author
+## Roadmap
 
-Developed by **Siva Sridhar Natuva**
+- [x] Tabs
+- [ ] Accordion
+- [ ] Dialog / Modal
+- [ ] Popover
+- [ ] Select
+- [ ] Checkbox & Radio group
+- [ ] Toggle / Switch
+- [x] Tooltip
+- [ ] Accessibility utilities
+- [ ] CDK integrations
+- [ ] Documentation site
+
+---
+
+## Contributing
+
+Contributions are welcome. If you have ideas for new primitives, accessibility improvements, or API refinements, open an issue or pull request.
 
 ---
 
-## ⭐ Support
+## Author
 
-If you find this useful:
-
-* Star the repo ⭐
-* Share with Angular community
-* Use it in your projects
+Built by **Siva Sridhar Natuva**.
 
 ---
 
-## 🔍 Keywords
+## License
 
-Angular • Signals • UI Primitives • Component Library • Standalone Components • Design System
-
----
+MIT
