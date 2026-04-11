@@ -14,7 +14,6 @@ export class TooltipOverlay {
         private readonly origin: HTMLElement
     ) { }
 
-    // tooltip.overlay.ts
     attach(template: TemplateRef<unknown>, vcr: ViewContainerRef): void {
         if (!this.overlayRef) {
             this.overlayRef = this.createOverlay();

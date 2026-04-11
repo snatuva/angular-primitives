@@ -6,8 +6,7 @@ import {
     inject,
     Injector,
     OnDestroy,
-    runInInjectionContext,
-    ViewContainerRef,
+    runInInjectionContext
 } from '@angular/core';
 import { TooltipState } from './tooltip.state';
 import { TooltipContentDirective } from './tooltip-content.directive';
@@ -25,7 +24,6 @@ import { DOCUMENT } from '@angular/common';
 export class TooltipDirective implements AfterContentInit, OnDestroy {
     state = inject(TooltipState);
     private overlay = inject(Overlay);
-    private vcr = inject(ViewContainerRef);
     private injector = inject(Injector);
     private document = inject(DOCUMENT);
 
@@ -36,12 +34,6 @@ export class TooltipDirective implements AfterContentInit, OnDestroy {
     trigger = contentChild(TooltipTriggerDirective);
 
     ngAfterContentInit() {
-        console.log('contentTemplate', this.contentTemplate());
-        console.log('trigger', this.trigger());
-        console.log('templateRef', this.contentTemplate()?.templateRef);
-        console.log('vcr', this.contentTemplate()?.vcr);
-
-
         const content = this.contentTemplate();
         if (content) {
             this.state.setTooltipId(content.tooltipId);
@@ -80,7 +72,7 @@ export class TooltipDirective implements AfterContentInit, OnDestroy {
             this.tooltipOverlay = new TooltipOverlay(this.overlay, triggerElement);
         }
 
-        this.tooltipOverlay.attach(content.templateRef, content.vcr); // ✅
+        this.tooltipOverlay.attach(content.templateRef, content.vcr);
         this.tooltipOverlay.setAttributes({
             role: 'tooltip',
             id: this.state.tooltipId() ?? 'tooltip'
