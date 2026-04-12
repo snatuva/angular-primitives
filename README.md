@@ -145,7 +145,7 @@ Every primitive is built to satisfy ARIA authoring practices out of the box:
 ## Roadmap
 
 - [x] Tabs
-- [ ] Accordion
+- [x] Accordion
 - [ ] Dialog / Modal
 - [ ] Popover
 - [ ] Select
