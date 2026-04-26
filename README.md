@@ -146,7 +146,7 @@ Every primitive is built to satisfy ARIA authoring practices out of the box:
 
 - [x] Tabs
 - [x] Accordion
-- [ ] Dialog / Modal
+- [x] Dialog / Modal
 - [ ] Popover
 - [ ] Select
 - [ ] Checkbox & Radio group
