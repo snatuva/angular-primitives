@@ -33,14 +33,14 @@ export class TooltipTriggerDirective {
 
     onMouseEnter() {
         this.clearTimeouts();
-        this.showTimeout = window.setTimeout(() => {
+        this.showTimeout = setTimeout(() => {
             this.state.openTooltip();
         }, this.showDelay());
     }
 
     onMouseLeave() {
         this.clearTimeouts();
-        this.hideTimeout = window.setTimeout(() => {
+        this.hideTimeout = setTimeout(() => {
             this.state.closeTooltip();
         }, this.hideDelay());
     }
@@ -52,7 +52,7 @@ export class TooltipTriggerDirective {
 
     onBlur() {
         this.clearTimeouts();
-        this.hideTimeout = window.setTimeout(() => {
+        this.hideTimeout = setTimeout(() => {
             this.state.closeTooltip();
         }, this.hideDelay());
     }

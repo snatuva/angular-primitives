@@ -5,10 +5,13 @@ import {
   effect,
   ElementRef,
   OnDestroy,
+  afterNextRender,
+  Injector,
 } from '@angular/core';
+import { DOCUMENT } from '@angular/common';
 import { DialogDirective } from './dialog.directive';
-import { FocusTrap } from './focus-trap';
-import { ScrollLock } from './scroll-lock';
+import { ScrollLockService } from './scroll-lock.service';
+import { ConfigurableFocusTrapFactory, ConfigurableFocusTrap } from '@angular/cdk/a11y';
 
 /**
  * `apDialogContent`
@@ -53,8 +56,13 @@ import { ScrollLock } from './scroll-lock';
 export class DialogContentDirective implements OnDestroy {
   private readonly dialog = inject(DialogDirective);
   private readonly el = inject(ElementRef<HTMLElement>);
+  private readonly focusTrapFactory = inject(ConfigurableFocusTrapFactory);
+  private readonly scrollLockService = inject(ScrollLockService);
+  private readonly injector = inject(Injector);
+  private readonly document = inject(DOCUMENT);
 
-  private focusTrap: FocusTrap | null = null;
+  private focusTrap: ConfigurableFocusTrap | null = null;
+  private previouslyFocusedElement: HTMLElement | null = null;
 
   readonly isOpen = this.dialog.isOpen;
   readonly isModal = computed(() => this.dialog.modal());
@@ -81,23 +89,32 @@ export class DialogContentDirective implements OnDestroy {
 
   private onOpen(): void {
     if (this.dialog.modal()) {
-      ScrollLock.lock();
+      this.scrollLockService.lock();
     }
+
+    this.previouslyFocusedElement = this.document.activeElement as HTMLElement | null;
 
     // Initialize focus trap once the element is visible
     // (hidden attribute is removed by the host binding before this runs)
     Promise.resolve().then(() => {
-      this.focusTrap = new FocusTrap(this.el.nativeElement);
-      this.focusTrap.activate();
+      if (!this.isOpen()) return;
+      this.focusTrap = this.focusTrapFactory.create(this.el.nativeElement);
+      this.focusTrap.focusInitialElementWhenReady();
     });
   }
 
   private onClose(): void {
-    this.focusTrap?.deactivate();
+    this.focusTrap?.destroy();
     this.focusTrap = null;
 
     if (this.dialog.modal()) {
-      ScrollLock.unlock();
+      this.scrollLockService.unlock();
+    }
+    
+    if (this.previouslyFocusedElement) {
+      // Defer to avoid conflicts with ongoing DOM transitions
+      Promise.resolve().then(() => this.previouslyFocusedElement?.focus());
+      this.previouslyFocusedElement = null;
     }
   }
 

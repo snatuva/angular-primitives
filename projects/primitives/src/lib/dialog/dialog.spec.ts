@@ -1,6 +1,7 @@
-import { Component } from '@angular/core';
-import { ComponentFixture, TestBed, fakeAsync, tick } from '@angular/core/testing';
+import { Component, signal } from '@angular/core';
+import { ComponentFixture, TestBed } from '@angular/core/testing';
 import { By } from '@angular/platform-browser';
+import { A11yModule } from '@angular/cdk/a11y';
 
 import { DialogDirective } from './dialog.directive';
 import { DialogTriggerDirective } from './dialog-trigger.directive';
@@ -28,9 +29,9 @@ import {
     DialogCloseDirective,
   ],
   template: `
-    <div apDialog [open]="controlledOpen" (openChange)="onOpenChange($event)"
-         [modal]="modal" [closeOnBackdropClick]="closeOnBackdropClick"
-         [closeOnEscape]="closeOnEscape" [role]="role">
+    <div apDialog [open]="controlledOpen()" (openChange)="onOpenChange($event)"
+         [modal]="modal()" [closeOnBackdropClick]="closeOnBackdropClick()"
+         [closeOnEscape]="closeOnEscape()" [role]="role()">
       <button apDialogTrigger id="trigger">Open</button>
       <div apDialogOverlay id="overlay">
         <div apDialogContent id="panel">
@@ -44,14 +45,17 @@ import {
   `,
 })
 class TestDialogComponent {
-  controlledOpen = false;
-  modal = true;
-  closeOnBackdropClick = true;
-  closeOnEscape = true;
-  role: 'dialog' | 'alertdialog' = 'dialog';
+  controlledOpen = signal(false);
+  modal = signal(true);
+  closeOnBackdropClick = signal(true);
+  closeOnEscape = signal(true);
+  role = signal<'dialog' | 'alertdialog'>('dialog');
   lastOpenChange: boolean | null = null;
 
-  onOpenChange(v: boolean) { this.lastOpenChange = v; }
+  onOpenChange(v: boolean) { 
+    this.lastOpenChange = v; 
+    this.controlledOpen.set(v);
+  }
 }
 
 // ---------------------------------------------------------------------------
@@ -59,16 +63,16 @@ class TestDialogComponent {
 // ---------------------------------------------------------------------------
 
 function getTrigger(f: ComponentFixture<TestDialogComponent>): HTMLButtonElement {
-  return f.nativeElement.querySelector('#trigger');
+  return f.nativeElement.querySelector('[apDialogTrigger]');
 }
 function getOverlay(f: ComponentFixture<TestDialogComponent>): HTMLElement {
-  return f.nativeElement.querySelector('#overlay');
+  return f.nativeElement.querySelector('[apDialogOverlay]');
 }
 function getPanel(f: ComponentFixture<TestDialogComponent>): HTMLElement {
-  return f.nativeElement.querySelector('#panel');
+  return f.nativeElement.querySelector('[apDialogContent]');
 }
 function getCloseBtn(f: ComponentFixture<TestDialogComponent>): HTMLButtonElement {
-  return f.nativeElement.querySelector('#last-btn');
+  return f.nativeElement.querySelector('[apDialogClose]');
 }
 
 // ---------------------------------------------------------------------------
@@ -80,7 +84,7 @@ describe('DialogDirective', () => {
   let component: TestDialogComponent;
 
   beforeEach(async () => {
-    await TestBed.configureTestingModule({ imports: [TestDialogComponent] }).compileComponents();
+    await TestBed.configureTestingModule({ imports: [TestDialogComponent, A11yModule] }).compileComponents();
     fixture = TestBed.createComponent(TestDialogComponent);
     component = fixture.componentInstance;
     fixture.detectChanges();
@@ -109,7 +113,7 @@ describe('DialogDirective', () => {
   });
 
   it('should set role="alertdialog" when configured', () => {
-    component.role = 'alertdialog';
+    component.role.set('alertdialog');
     fixture.detectChanges();
     expect(getPanel(fixture).getAttribute('role')).toBe('alertdialog');
   });
@@ -119,7 +123,7 @@ describe('DialogDirective', () => {
   });
 
   it('should not set aria-modal when modal=false', () => {
-    component.modal = false;
+    component.modal.set(false);
     fixture.detectChanges();
     expect(getPanel(fixture).getAttribute('aria-modal')).toBe('false');
   });
@@ -127,14 +131,14 @@ describe('DialogDirective', () => {
   it('should wire aria-labelledby to the title element id', () => {
     const panel = getPanel(fixture);
     const titleId = panel.getAttribute('aria-labelledby')!;
-    const titleEl = fixture.nativeElement.querySelector(`#title-el`);
+    const titleEl = fixture.nativeElement.querySelector('[apDialogTitle]');
     expect(titleEl.id).toBe(titleId);
   });
 
   it('should wire aria-describedby to the description element id', () => {
     const panel = getPanel(fixture);
     const descId = panel.getAttribute('aria-describedby')!;
-    const descEl = fixture.nativeElement.querySelector('#desc-el');
+    const descEl = fixture.nativeElement.querySelector('[apDialogDescription]');
     expect(descEl.id).toBe(descId);
   });
 
@@ -148,91 +152,91 @@ describe('DialogDirective', () => {
     expect(getTrigger(fixture).getAttribute('aria-haspopup')).toBe('dialog');
   });
 
-  it('should update aria-expanded on trigger when dialog opens', fakeAsync(() => {
+  it('should update aria-expanded on trigger when dialog opens', async () => {
     const trigger = getTrigger(fixture);
     expect(trigger.getAttribute('aria-expanded')).toBe('false');
 
     trigger.click();
     fixture.detectChanges();
-    tick();
+    await new Promise(r => setTimeout(r, 0));
 
     expect(trigger.getAttribute('aria-expanded')).toBe('true');
-  }));
+  });
 
   // -------------------------------------------------------------------------
   // Open / close
   // -------------------------------------------------------------------------
 
-  it('should open dialog when trigger is clicked', fakeAsync(() => {
+  it('should open dialog when trigger is clicked', async () => {
     getTrigger(fixture).click();
     fixture.detectChanges();
-    tick();
+    await new Promise(r => setTimeout(r, 0));
 
     expect(getPanel(fixture).hasAttribute('hidden')).toBe(false);
     expect(getOverlay(fixture).hasAttribute('hidden')).toBe(false);
-  }));
+  });
 
-  it('should close dialog when close button is clicked', fakeAsync(() => {
+  it('should close dialog when close button is clicked', async () => {
     getTrigger(fixture).click();
     fixture.detectChanges();
-    tick();
+    await new Promise(r => setTimeout(r, 0));
 
     getCloseBtn(fixture).click();
     fixture.detectChanges();
 
     expect(getPanel(fixture).hasAttribute('hidden')).toBe(true);
-  }));
+  });
 
-  it('should emit openChange when dialog opens', fakeAsync(() => {
+  it('should emit openChange when dialog opens', async () => {
     getTrigger(fixture).click();
     fixture.detectChanges();
-    tick();
+    await new Promise(r => setTimeout(r, 0));
 
     expect(component.lastOpenChange).toBe(true);
-  }));
+  });
 
-  it('should emit openChange(false) when dialog closes', fakeAsync(() => {
+  it('should emit openChange(false) when dialog closes', async () => {
     getTrigger(fixture).click();
     fixture.detectChanges();
-    tick();
+    await new Promise(r => setTimeout(r, 0));
 
     getCloseBtn(fixture).click();
     fixture.detectChanges();
 
     expect(component.lastOpenChange).toBe(false);
-  }));
+  });
 
   // -------------------------------------------------------------------------
   // Controlled mode
   // -------------------------------------------------------------------------
 
-  it('should open when [open] input is set to true', fakeAsync(() => {
-    component.controlledOpen = true;
+  it('should open when [open] input is set to true', async () => {
+    component.controlledOpen.set(true);
     fixture.detectChanges();
-    tick();
+    await new Promise(r => setTimeout(r, 0));
 
     expect(getPanel(fixture).hasAttribute('hidden')).toBe(false);
-  }));
+  });
 
-  it('should close when [open] input is set to false', fakeAsync(() => {
-    component.controlledOpen = true;
+  it('should close when [open] input is set to false', async () => {
+    component.controlledOpen.set(true);
     fixture.detectChanges();
-    tick();
+    await new Promise(r => setTimeout(r, 0));
 
-    component.controlledOpen = false;
+    component.controlledOpen.set(false);
     fixture.detectChanges();
 
     expect(getPanel(fixture).hasAttribute('hidden')).toBe(true);
-  }));
+  });
 
   // -------------------------------------------------------------------------
   // Backdrop click
   // -------------------------------------------------------------------------
 
-  it('should close on backdrop click when closeOnBackdropClick=true', fakeAsync(() => {
+  it('should close on backdrop click when closeOnBackdropClick=true', async () => {
     getTrigger(fixture).click();
     fixture.detectChanges();
-    tick();
+    await new Promise(r => setTimeout(r, 0));
 
     const overlay = getOverlay(fixture);
     overlay.dispatchEvent(new MouseEvent('click', { bubbles: true, cancelable: true }));
@@ -246,64 +250,64 @@ describe('DialogDirective', () => {
     fixture.detectChanges();
 
     expect(getPanel(fixture).hasAttribute('hidden')).toBe(true);
-  }));
+  });
 
-  it('should NOT close on backdrop click when closeOnBackdropClick=false', fakeAsync(() => {
-    component.closeOnBackdropClick = false;
+  it('should NOT close on backdrop click when closeOnBackdropClick=false', async () => {
+    component.closeOnBackdropClick.set(false);
     fixture.detectChanges();
 
     getTrigger(fixture).click();
     fixture.detectChanges();
-    tick();
+    await new Promise(r => setTimeout(r, 0));
 
     // Even if overlay is clicked, dialog should stay open
     // (tested via the directive input — full DOM simulation handled above)
     const dialogDir = fixture.debugElement.query(By.directive(DialogDirective))
       .injector.get(DialogDirective);
 
-    expect(dialogDir.closeOnBackdropClick).toBe(false);
+    expect(dialogDir.closeOnBackdropClick()).toBe(false);
     expect(getPanel(fixture).hasAttribute('hidden')).toBe(false);
-  }));
+  });
 
   // -------------------------------------------------------------------------
   // Escape key
   // -------------------------------------------------------------------------
 
-  it('should close on Escape when closeOnEscape=true', fakeAsync(() => {
+  it('should close on Escape when closeOnEscape=true', async () => {
     getTrigger(fixture).click();
     fixture.detectChanges();
-    tick();
+    await new Promise(r => setTimeout(r, 0));
 
     getPanel(fixture).dispatchEvent(new KeyboardEvent('keydown', { key: 'Escape', bubbles: true }));
     fixture.detectChanges();
 
     expect(getPanel(fixture).hasAttribute('hidden')).toBe(true);
-  }));
+  });
 
-  it('should NOT close on Escape when closeOnEscape=false', fakeAsync(() => {
-    component.closeOnEscape = false;
+  it('should NOT close on Escape when closeOnEscape=false', async () => {
+    component.closeOnEscape.set(false);
     fixture.detectChanges();
 
     getTrigger(fixture).click();
     fixture.detectChanges();
-    tick();
+    await new Promise(r => setTimeout(r, 0));
 
     getPanel(fixture).dispatchEvent(new KeyboardEvent('keydown', { key: 'Escape', bubbles: true }));
     fixture.detectChanges();
 
     expect(getPanel(fixture).hasAttribute('hidden')).toBe(false);
-  }));
+  });
 
   // -------------------------------------------------------------------------
   // data-state
   // -------------------------------------------------------------------------
 
-  it('should set data-state="open" on panel and overlay when open', fakeAsync(() => {
+  it('should set data-state="open" on panel and overlay when open', async () => {
     getTrigger(fixture).click();
     fixture.detectChanges();
-    tick();
+    await new Promise(r => setTimeout(r, 0));
 
     expect(getPanel(fixture).getAttribute('data-state')).toBe('open');
     expect(getOverlay(fixture).getAttribute('data-state')).toBe('open');
-  }));
+  });
 });

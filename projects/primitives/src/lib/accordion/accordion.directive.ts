@@ -4,7 +4,6 @@ import {
   computed,
   signal,
   effect,
-  OnInit,
 } from '@angular/core';
 import { AccordionType, AccordionOrientation } from './accordion.types';
 
@@ -30,7 +29,7 @@ import { AccordionType, AccordionOrientation } from './accordion.types';
     '[attr.data-orientation]': 'orientation()',
   },
 })
-export class AccordionDirective implements OnInit {
+export class AccordionDirective {
   /**
    * Whether one or multiple items can be open simultaneously.
    * @default 'single'
@@ -76,7 +75,7 @@ export class AccordionDirective implements OnInit {
   /** Read-only signal exposing currently expanded item ids */
   readonly expandedIds = computed(() => this._expandedIds());
 
-  ngOnInit(): void {
+  constructor() {
     // Sync controlled `value` input into internal signal
     effect(() => {
       const value = this.value();

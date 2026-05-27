@@ -1,0 +1,495 @@
+
+> @snatuva/primitives@0.0.12 test:vitest:run
+> vitest run projects/primitives/src/lib/dialog/dialog.spec.ts
+
+
+[1m[30m[46m RUN [49m[39m[22m [36mv4.1.4 [39m[90m/Users/sridhar/projects/Angular Projects/angular-primitives[39m
+
+[90mstderr[2m | projects/primitives/src/lib/dialog/dialog.spec.ts[2m > [22m[2mDialogDirective[2m > [22m[2mshould render with dialog closed by default
+[22m[39mNG0303: Can't bind to 'open' since it isn't a known property of 'div' (used in the 'TestDialogComponent' component template).
+1. If 'div' is an Angular component and it has the 'open' input, then verify that it is included in the '@Component.imports' of this component.
+2. To allow any property add 'NO_ERRORS_SCHEMA' to the '@Component.schemas' of this component.
+NG0303: Can't bind to 'modal' since it isn't a known property of 'div' (used in the 'TestDialogComponent' component template).
+1. If 'div' is an Angular component and it has the 'modal' input, then verify that it is included in the '@Component.imports' of this component.
+2. To allow any property add 'NO_ERRORS_SCHEMA' to the '@Component.schemas' of this component.
+NG0303: Can't bind to 'closeOnBackdropClick' since it isn't a known property of 'div' (used in the 'TestDialogComponent' component template).
+1. If 'div' is an Angular component and it has the 'closeOnBackdropClick' input, then verify that it is included in the '@Component.imports' of this component.
+2. To allow any property add 'NO_ERRORS_SCHEMA' to the '@Component.schemas' of this component.
+NG0303: Can't bind to 'closeOnEscape' since it isn't a known property of 'div' (used in the 'TestDialogComponent' component template).
+1. If 'div' is an Angular component and it has the 'closeOnEscape' input, then verify that it is included in the '@Component.imports' of this component.
+2. To allow any property add 'NO_ERRORS_SCHEMA' to the '@Component.schemas' of this component.
+
+[90mstderr[2m | projects/primitives/src/lib/dialog/dialog.spec.ts[2m > [22m[2mDialogDirective[2m > [22m[2mshould set data-state="closed" initially
+[22m[39mNG0303: Can't bind to 'open' since it isn't a known property of 'div' (used in the 'TestDialogComponent' component template).
+1. If 'div' is an Angular component and it has the 'open' input, then verify that it is included in the '@Component.imports' of this component.
+2. To allow any property add 'NO_ERRORS_SCHEMA' to the '@Component.schemas' of this component.
+NG0303: Can't bind to 'modal' since it isn't a known property of 'div' (used in the 'TestDialogComponent' component template).
+1. If 'div' is an Angular component and it has the 'modal' input, then verify that it is included in the '@Component.imports' of this component.
+2. To allow any property add 'NO_ERRORS_SCHEMA' to the '@Component.schemas' of this component.
+NG0303: Can't bind to 'closeOnBackdropClick' since it isn't a known property of 'div' (used in the 'TestDialogComponent' component template).
+1. If 'div' is an Angular component and it has the 'closeOnBackdropClick' input, then verify that it is included in the '@Component.imports' of this component.
+2. To allow any property add 'NO_ERRORS_SCHEMA' to the '@Component.schemas' of this component.
+NG0303: Can't bind to 'closeOnEscape' since it isn't a known property of 'div' (used in the 'TestDialogComponent' component template).
+1. If 'div' is an Angular component and it has the 'closeOnEscape' input, then verify that it is included in the '@Component.imports' of this component.
+2. To allow any property add 'NO_ERRORS_SCHEMA' to the '@Component.schemas' of this component.
+
+[90mstderr[2m | projects/primitives/src/lib/dialog/dialog.spec.ts[2m > [22m[2mDialogDirective[2m > [22m[2mshould set role="dialog" on the panel
+[22m[39mNG0303: Can't bind to 'open' since it isn't a known property of 'div' (used in the 'TestDialogComponent' component template).
+1. If 'div' is an Angular component and it has the 'open' input, then verify that it is included in the '@Component.imports' of this component.
+2. To allow any property add 'NO_ERRORS_SCHEMA' to the '@Component.schemas' of this component.
+NG0303: Can't bind to 'modal' since it isn't a known property of 'div' (used in the 'TestDialogComponent' component template).
+1. If 'div' is an Angular component and it has the 'modal' input, then verify that it is included in the '@Component.imports' of this component.
+2. To allow any property add 'NO_ERRORS_SCHEMA' to the '@Component.schemas' of this component.
+NG0303: Can't bind to 'closeOnBackdropClick' since it isn't a known property of 'div' (used in the 'TestDialogComponent' component template).
+1. If 'div' is an Angular component and it has the 'closeOnBackdropClick' input, then verify that it is included in the '@Component.imports' of this component.
+2. To allow any property add 'NO_ERRORS_SCHEMA' to the '@Component.schemas' of this component.
+NG0303: Can't bind to 'closeOnEscape' since it isn't a known property of 'div' (used in the 'TestDialogComponent' component template).
+1. If 'div' is an Angular component and it has the 'closeOnEscape' input, then verify that it is included in the '@Component.imports' of this component.
+2. To allow any property add 'NO_ERRORS_SCHEMA' to the '@Component.schemas' of this component.
+
+[90mstderr[2m | projects/primitives/src/lib/dialog/dialog.spec.ts[2m > [22m[2mDialogDirective[2m > [22m[2mshould set role="alertdialog" when configured
+[22m[39mNG0303: Can't bind to 'open' since it isn't a known property of 'div' (used in the 'TestDialogComponent' component template).
+1. If 'div' is an Angular component and it has the 'open' input, then verify that it is included in the '@Component.imports' of this component.
+2. To allow any property add 'NO_ERRORS_SCHEMA' to the '@Component.schemas' of this component.
+NG0303: Can't bind to 'modal' since it isn't a known property of 'div' (used in the 'TestDialogComponent' component template).
+1. If 'div' is an Angular component and it has the 'modal' input, then verify that it is included in the '@Component.imports' of this component.
+2. To allow any property add 'NO_ERRORS_SCHEMA' to the '@Component.schemas' of this component.
+NG0303: Can't bind to 'closeOnBackdropClick' since it isn't a known property of 'div' (used in the 'TestDialogComponent' component template).
+1. If 'div' is an Angular component and it has the 'closeOnBackdropClick' input, then verify that it is included in the '@Component.imports' of this component.
+2. To allow any property add 'NO_ERRORS_SCHEMA' to the '@Component.schemas' of this component.
+NG0303: Can't bind to 'closeOnEscape' since it isn't a known property of 'div' (used in the 'TestDialogComponent' component template).
+1. If 'div' is an Angular component and it has the 'closeOnEscape' input, then verify that it is included in the '@Component.imports' of this component.
+2. To allow any property add 'NO_ERRORS_SCHEMA' to the '@Component.schemas' of this component.
+
+[90mstderr[2m | projects/primitives/src/lib/dialog/dialog.spec.ts[2m > [22m[2mDialogDirective[2m > [22m[2mshould set aria-modal="true" in modal mode
+[22m[39mNG0303: Can't bind to 'open' since it isn't a known property of 'div' (used in the 'TestDialogComponent' component template).
+1. If 'div' is an Angular component and it has the 'open' input, then verify that it is included in the '@Component.imports' of this component.
+2. To allow any property add 'NO_ERRORS_SCHEMA' to the '@Component.schemas' of this component.
+NG0303: Can't bind to 'modal' since it isn't a known property of 'div' (used in the 'TestDialogComponent' component template).
+1. If 'div' is an Angular component and it has the 'modal' input, then verify that it is included in the '@Component.imports' of this component.
+2. To allow any property add 'NO_ERRORS_SCHEMA' to the '@Component.schemas' of this component.
+NG0303: Can't bind to 'closeOnBackdropClick' since it isn't a known property of 'div' (used in the 'TestDialogComponent' component template).
+1. If 'div' is an Angular component and it has the 'closeOnBackdropClick' input, then verify that it is included in the '@Component.imports' of this component.
+2. To allow any property add 'NO_ERRORS_SCHEMA' to the '@Component.schemas' of this component.
+NG0303: Can't bind to 'closeOnEscape' since it isn't a known property of 'div' (used in the 'TestDialogComponent' component template).
+1. If 'div' is an Angular component and it has the 'closeOnEscape' input, then verify that it is included in the '@Component.imports' of this component.
+2. To allow any property add 'NO_ERRORS_SCHEMA' to the '@Component.schemas' of this component.
+
+[90mstderr[2m | projects/primitives/src/lib/dialog/dialog.spec.ts[2m > [22m[2mDialogDirective[2m > [22m[2mshould not set aria-modal when modal=false
+[22m[39mNG0303: Can't bind to 'open' since it isn't a known property of 'div' (used in the 'TestDialogComponent' component template).
+1. If 'div' is an Angular component and it has the 'open' input, then verify that it is included in the '@Component.imports' of this component.
+2. To allow any property add 'NO_ERRORS_SCHEMA' to the '@Component.schemas' of this component.
+NG0303: Can't bind to 'modal' since it isn't a known property of 'div' (used in the 'TestDialogComponent' component template).
+1. If 'div' is an Angular component and it has the 'modal' input, then verify that it is included in the '@Component.imports' of this component.
+2. To allow any property add 'NO_ERRORS_SCHEMA' to the '@Component.schemas' of this component.
+NG0303: Can't bind to 'closeOnBackdropClick' since it isn't a known property of 'div' (used in the 'TestDialogComponent' component template).
+1. If 'div' is an Angular component and it has the 'closeOnBackdropClick' input, then verify that it is included in the '@Component.imports' of this component.
+2. To allow any property add 'NO_ERRORS_SCHEMA' to the '@Component.schemas' of this component.
+NG0303: Can't bind to 'closeOnEscape' since it isn't a known property of 'div' (used in the 'TestDialogComponent' component template).
+1. If 'div' is an Angular component and it has the 'closeOnEscape' input, then verify that it is included in the '@Component.imports' of this component.
+2. To allow any property add 'NO_ERRORS_SCHEMA' to the '@Component.schemas' of this component.
+
+[90mstderr[2m | projects/primitives/src/lib/dialog/dialog.spec.ts[2m > [22m[2mDialogDirective[2m > [22m[2mshould wire aria-labelledby to the title element id
+[22m[39mNG0303: Can't bind to 'open' since it isn't a known property of 'div' (used in the 'TestDialogComponent' component template).
+1. If 'div' is an Angular component and it has the 'open' input, then verify that it is included in the '@Component.imports' of this component.
+2. To allow any property add 'NO_ERRORS_SCHEMA' to the '@Component.schemas' of this component.
+NG0303: Can't bind to 'modal' since it isn't a known property of 'div' (used in the 'TestDialogComponent' component template).
+1. If 'div' is an Angular component and it has the 'modal' input, then verify that it is included in the '@Component.imports' of this component.
+2. To allow any property add 'NO_ERRORS_SCHEMA' to the '@Component.schemas' of this component.
+NG0303: Can't bind to 'closeOnBackdropClick' since it isn't a known property of 'div' (used in the 'TestDialogComponent' component template).
+1. If 'div' is an Angular component and it has the 'closeOnBackdropClick' input, then verify that it is included in the '@Component.imports' of this component.
+2. To allow any property add 'NO_ERRORS_SCHEMA' to the '@Component.schemas' of this component.
+NG0303: Can't bind to 'closeOnEscape' since it isn't a known property of 'div' (used in the 'TestDialogComponent' component template).
+1. If 'div' is an Angular component and it has the 'closeOnEscape' input, then verify that it is included in the '@Component.imports' of this component.
+2. To allow any property add 'NO_ERRORS_SCHEMA' to the '@Component.schemas' of this component.
+
+[90mstderr[2m | projects/primitives/src/lib/dialog/dialog.spec.ts[2m > [22m[2mDialogDirective[2m > [22m[2mshould wire aria-describedby to the description element id
+[22m[39mNG0303: Can't bind to 'open' since it isn't a known property of 'div' (used in the 'TestDialogComponent' component template).
+1. If 'div' is an Angular component and it has the 'open' input, then verify that it is included in the '@Component.imports' of this component.
+2. To allow any property add 'NO_ERRORS_SCHEMA' to the '@Component.schemas' of this component.
+NG0303: Can't bind to 'modal' since it isn't a known property of 'div' (used in the 'TestDialogComponent' component template).
+1. If 'div' is an Angular component and it has the 'modal' input, then verify that it is included in the '@Component.imports' of this component.
+2. To allow any property add 'NO_ERRORS_SCHEMA' to the '@Component.schemas' of this component.
+NG0303: Can't bind to 'closeOnBackdropClick' since it isn't a known property of 'div' (used in the 'TestDialogComponent' component template).
+1. If 'div' is an Angular component and it has the 'closeOnBackdropClick' input, then verify that it is included in the '@Component.imports' of this component.
+2. To allow any property add 'NO_ERRORS_SCHEMA' to the '@Component.schemas' of this component.
+NG0303: Can't bind to 'closeOnEscape' since it isn't a known property of 'div' (used in the 'TestDialogComponent' component template).
+1. If 'div' is an Angular component and it has the 'closeOnEscape' input, then verify that it is included in the '@Component.imports' of this component.
+2. To allow any property add 'NO_ERRORS_SCHEMA' to the '@Component.schemas' of this component.
+
+[90mstderr[2m | projects/primitives/src/lib/dialog/dialog.spec.ts[2m > [22m[2mDialogDirective[2m > [22m[2mshould wire aria-controls on trigger to panel id
+[22m[39mNG0303: Can't bind to 'open' since it isn't a known property of 'div' (used in the 'TestDialogComponent' component template).
+1. If 'div' is an Angular component and it has the 'open' input, then verify that it is included in the '@Component.imports' of this component.
+2. To allow any property add 'NO_ERRORS_SCHEMA' to the '@Component.schemas' of this component.
+NG0303: Can't bind to 'modal' since it isn't a known property of 'div' (used in the 'TestDialogComponent' component template).
+1. If 'div' is an Angular component and it has the 'modal' input, then verify that it is included in the '@Component.imports' of this component.
+2. To allow any property add 'NO_ERRORS_SCHEMA' to the '@Component.schemas' of this component.
+NG0303: Can't bind to 'closeOnBackdropClick' since it isn't a known property of 'div' (used in the 'TestDialogComponent' component template).
+1. If 'div' is an Angular component and it has the 'closeOnBackdropClick' input, then verify that it is included in the '@Component.imports' of this component.
+2. To allow any property add 'NO_ERRORS_SCHEMA' to the '@Component.schemas' of this component.
+NG0303: Can't bind to 'closeOnEscape' since it isn't a known property of 'div' (used in the 'TestDialogComponent' component template).
+1. If 'div' is an Angular component and it has the 'closeOnEscape' input, then verify that it is included in the '@Component.imports' of this component.
+2. To allow any property add 'NO_ERRORS_SCHEMA' to the '@Component.schemas' of this component.
+
+[90mstderr[2m | projects/primitives/src/lib/dialog/dialog.spec.ts[2m > [22m[2mDialogDirective[2m > [22m[2mshould set aria-haspopup="dialog" on the trigger
+[22m[39mNG0303: Can't bind to 'open' since it isn't a known property of 'div' (used in the 'TestDialogComponent' component template).
+1. If 'div' is an Angular component and it has the 'open' input, then verify that it is included in the '@Component.imports' of this component.
+2. To allow any property add 'NO_ERRORS_SCHEMA' to the '@Component.schemas' of this component.
+NG0303: Can't bind to 'modal' since it isn't a known property of 'div' (used in the 'TestDialogComponent' component template).
+1. If 'div' is an Angular component and it has the 'modal' input, then verify that it is included in the '@Component.imports' of this component.
+2. To allow any property add 'NO_ERRORS_SCHEMA' to the '@Component.schemas' of this component.
+NG0303: Can't bind to 'closeOnBackdropClick' since it isn't a known property of 'div' (used in the 'TestDialogComponent' component template).
+1. If 'div' is an Angular component and it has the 'closeOnBackdropClick' input, then verify that it is included in the '@Component.imports' of this component.
+2. To allow any property add 'NO_ERRORS_SCHEMA' to the '@Component.schemas' of this component.
+NG0303: Can't bind to 'closeOnEscape' since it isn't a known property of 'div' (used in the 'TestDialogComponent' component template).
+1. If 'div' is an Angular component and it has the 'closeOnEscape' input, then verify that it is included in the '@Component.imports' of this component.
+2. To allow any property add 'NO_ERRORS_SCHEMA' to the '@Component.schemas' of this component.
+
+[90mstderr[2m | projects/primitives/src/lib/dialog/dialog.spec.ts[2m > [22m[2mDialogDirective[2m > [22m[2mshould update aria-expanded on trigger when dialog opens
+[22m[39mNG0303: Can't bind to 'open' since it isn't a known property of 'div' (used in the 'TestDialogComponent' component template).
+1. If 'div' is an Angular component and it has the 'open' input, then verify that it is included in the '@Component.imports' of this component.
+2. To allow any property add 'NO_ERRORS_SCHEMA' to the '@Component.schemas' of this component.
+NG0303: Can't bind to 'modal' since it isn't a known property of 'div' (used in the 'TestDialogComponent' component template).
+1. If 'div' is an Angular component and it has the 'modal' input, then verify that it is included in the '@Component.imports' of this component.
+2. To allow any property add 'NO_ERRORS_SCHEMA' to the '@Component.schemas' of this component.
+NG0303: Can't bind to 'closeOnBackdropClick' since it isn't a known property of 'div' (used in the 'TestDialogComponent' component template).
+1. If 'div' is an Angular component and it has the 'closeOnBackdropClick' input, then verify that it is included in the '@Component.imports' of this component.
+2. To allow any property add 'NO_ERRORS_SCHEMA' to the '@Component.schemas' of this component.
+NG0303: Can't bind to 'closeOnEscape' since it isn't a known property of 'div' (used in the 'TestDialogComponent' component template).
+1. If 'div' is an Angular component and it has the 'closeOnEscape' input, then verify that it is included in the '@Component.imports' of this component.
+2. To allow any property add 'NO_ERRORS_SCHEMA' to the '@Component.schemas' of this component.
+
+[90mstderr[2m | projects/primitives/src/lib/dialog/dialog.spec.ts[2m > [22m[2mDialogDirective[2m > [22m[2mshould open dialog when trigger is clicked
+[22m[39mNG0303: Can't bind to 'open' since it isn't a known property of 'div' (used in the 'TestDialogComponent' component template).
+1. If 'div' is an Angular component and it has the 'open' input, then verify that it is included in the '@Component.imports' of this component.
+2. To allow any property add 'NO_ERRORS_SCHEMA' to the '@Component.schemas' of this component.
+NG0303: Can't bind to 'modal' since it isn't a known property of 'div' (used in the 'TestDialogComponent' component template).
+1. If 'div' is an Angular component and it has the 'modal' input, then verify that it is included in the '@Component.imports' of this component.
+2. To allow any property add 'NO_ERRORS_SCHEMA' to the '@Component.schemas' of this component.
+NG0303: Can't bind to 'closeOnBackdropClick' since it isn't a known property of 'div' (used in the 'TestDialogComponent' component template).
+1. If 'div' is an Angular component and it has the 'closeOnBackdropClick' input, then verify that it is included in the '@Component.imports' of this component.
+2. To allow any property add 'NO_ERRORS_SCHEMA' to the '@Component.schemas' of this component.
+NG0303: Can't bind to 'closeOnEscape' since it isn't a known property of 'div' (used in the 'TestDialogComponent' component template).
+1. If 'div' is an Angular component and it has the 'closeOnEscape' input, then verify that it is included in the '@Component.imports' of this component.
+2. To allow any property add 'NO_ERRORS_SCHEMA' to the '@Component.schemas' of this component.
+
+[90mstderr[2m | projects/primitives/src/lib/dialog/dialog.spec.ts[2m > [22m[2mDialogDirective[2m > [22m[2mshould close dialog when close button is clicked
+[22m[39mNG0303: Can't bind to 'open' since it isn't a known property of 'div' (used in the 'TestDialogComponent' component template).
+1. If 'div' is an Angular component and it has the 'open' input, then verify that it is included in the '@Component.imports' of this component.
+2. To allow any property add 'NO_ERRORS_SCHEMA' to the '@Component.schemas' of this component.
+NG0303: Can't bind to 'modal' since it isn't a known property of 'div' (used in the 'TestDialogComponent' component template).
+1. If 'div' is an Angular component and it has the 'modal' input, then verify that it is included in the '@Component.imports' of this component.
+2. To allow any property add 'NO_ERRORS_SCHEMA' to the '@Component.schemas' of this component.
+NG0303: Can't bind to 'closeOnBackdropClick' since it isn't a known property of 'div' (used in the 'TestDialogComponent' component template).
+1. If 'div' is an Angular component and it has the 'closeOnBackdropClick' input, then verify that it is included in the '@Component.imports' of this component.
+2. To allow any property add 'NO_ERRORS_SCHEMA' to the '@Component.schemas' of this component.
+NG0303: Can't bind to 'closeOnEscape' since it isn't a known property of 'div' (used in the 'TestDialogComponent' component template).
+1. If 'div' is an Angular component and it has the 'closeOnEscape' input, then verify that it is included in the '@Component.imports' of this component.
+2. To allow any property add 'NO_ERRORS_SCHEMA' to the '@Component.schemas' of this component.
+
+[90mstderr[2m | projects/primitives/src/lib/dialog/dialog.spec.ts[2m > [22m[2mDialogDirective[2m > [22m[2mshould emit openChange when dialog opens
+[22m[39mNG0303: Can't bind to 'open' since it isn't a known property of 'div' (used in the 'TestDialogComponent' component template).
+1. If 'div' is an Angular component and it has the 'open' input, then verify that it is included in the '@Component.imports' of this component.
+2. To allow any property add 'NO_ERRORS_SCHEMA' to the '@Component.schemas' of this component.
+NG0303: Can't bind to 'modal' since it isn't a known property of 'div' (used in the 'TestDialogComponent' component template).
+1. If 'div' is an Angular component and it has the 'modal' input, then verify that it is included in the '@Component.imports' of this component.
+2. To allow any property add 'NO_ERRORS_SCHEMA' to the '@Component.schemas' of this component.
+NG0303: Can't bind to 'closeOnBackdropClick' since it isn't a known property of 'div' (used in the 'TestDialogComponent' component template).
+1. If 'div' is an Angular component and it has the 'closeOnBackdropClick' input, then verify that it is included in the '@Component.imports' of this component.
+2. To allow any property add 'NO_ERRORS_SCHEMA' to the '@Component.schemas' of this component.
+NG0303: Can't bind to 'closeOnEscape' since it isn't a known property of 'div' (used in the 'TestDialogComponent' component template).
+1. If 'div' is an Angular component and it has the 'closeOnEscape' input, then verify that it is included in the '@Component.imports' of this component.
+2. To allow any property add 'NO_ERRORS_SCHEMA' to the '@Component.schemas' of this component.
+
+[90mstderr[2m | projects/primitives/src/lib/dialog/dialog.spec.ts[2m > [22m[2mDialogDirective[2m > [22m[2mshould emit openChange(false) when dialog closes
+[22m[39mNG0303: Can't bind to 'open' since it isn't a known property of 'div' (used in the 'TestDialogComponent' component template).
+1. If 'div' is an Angular component and it has the 'open' input, then verify that it is included in the '@Component.imports' of this component.
+2. To allow any property add 'NO_ERRORS_SCHEMA' to the '@Component.schemas' of this component.
+NG0303: Can't bind to 'modal' since it isn't a known property of 'div' (used in the 'TestDialogComponent' component template).
+1. If 'div' is an Angular component and it has the 'modal' input, then verify that it is included in the '@Component.imports' of this component.
+2. To allow any property add 'NO_ERRORS_SCHEMA' to the '@Component.schemas' of this component.
+NG0303: Can't bind to 'closeOnBackdropClick' since it isn't a known property of 'div' (used in the 'TestDialogComponent' component template).
+1. If 'div' is an Angular component and it has the 'closeOnBackdropClick' input, then verify that it is included in the '@Component.imports' of this component.
+2. To allow any property add 'NO_ERRORS_SCHEMA' to the '@Component.schemas' of this component.
+NG0303: Can't bind to 'closeOnEscape' since it isn't a known property of 'div' (used in the 'TestDialogComponent' component template).
+1. If 'div' is an Angular component and it has the 'closeOnEscape' input, then verify that it is included in the '@Component.imports' of this component.
+2. To allow any property add 'NO_ERRORS_SCHEMA' to the '@Component.schemas' of this component.
+
+[90mstderr[2m | projects/primitives/src/lib/dialog/dialog.spec.ts[2m > [22m[2mDialogDirective[2m > [22m[2mshould open when [open] input is set to true
+[22m[39mNG0303: Can't bind to 'open' since it isn't a known property of 'div' (used in the 'TestDialogComponent' component template).
+1. If 'div' is an Angular component and it has the 'open' input, then verify that it is included in the '@Component.imports' of this component.
+2. To allow any property add 'NO_ERRORS_SCHEMA' to the '@Component.schemas' of this component.
+NG0303: Can't bind to 'modal' since it isn't a known property of 'div' (used in the 'TestDialogComponent' component template).
+1. If 'div' is an Angular component and it has the 'modal' input, then verify that it is included in the '@Component.imports' of this component.
+2. To allow any property add 'NO_ERRORS_SCHEMA' to the '@Component.schemas' of this component.
+NG0303: Can't bind to 'closeOnBackdropClick' since it isn't a known property of 'div' (used in the 'TestDialogComponent' component template).
+1. If 'div' is an Angular component and it has the 'closeOnBackdropClick' input, then verify that it is included in the '@Component.imports' of this component.
+2. To allow any property add 'NO_ERRORS_SCHEMA' to the '@Component.schemas' of this component.
+NG0303: Can't bind to 'closeOnEscape' since it isn't a known property of 'div' (used in the 'TestDialogComponent' component template).
+1. If 'div' is an Angular component and it has the 'closeOnEscape' input, then verify that it is included in the '@Component.imports' of this component.
+2. To allow any property add 'NO_ERRORS_SCHEMA' to the '@Component.schemas' of this component.
+
+[90mstderr[2m | projects/primitives/src/lib/dialog/dialog.spec.ts[2m > [22m[2mDialogDirective[2m > [22m[2mshould close when [open] input is set to false
+[22m[39mNG0303: Can't bind to 'open' since it isn't a known property of 'div' (used in the 'TestDialogComponent' component template).
+1. If 'div' is an Angular component and it has the 'open' input, then verify that it is included in the '@Component.imports' of this component.
+2. To allow any property add 'NO_ERRORS_SCHEMA' to the '@Component.schemas' of this component.
+NG0303: Can't bind to 'modal' since it isn't a known property of 'div' (used in the 'TestDialogComponent' component template).
+1. If 'div' is an Angular component and it has the 'modal' input, then verify that it is included in the '@Component.imports' of this component.
+2. To allow any property add 'NO_ERRORS_SCHEMA' to the '@Component.schemas' of this component.
+NG0303: Can't bind to 'closeOnBackdropClick' since it isn't a known property of 'div' (used in the 'TestDialogComponent' component template).
+1. If 'div' is an Angular component and it has the 'closeOnBackdropClick' input, then verify that it is included in the '@Component.imports' of this component.
+2. To allow any property add 'NO_ERRORS_SCHEMA' to the '@Component.schemas' of this component.
+NG0303: Can't bind to 'closeOnEscape' since it isn't a known property of 'div' (used in the 'TestDialogComponent' component template).
+1. If 'div' is an Angular component and it has the 'closeOnEscape' input, then verify that it is included in the '@Component.imports' of this component.
+2. To allow any property add 'NO_ERRORS_SCHEMA' to the '@Component.schemas' of this component.
+
+[90mstderr[2m | projects/primitives/src/lib/dialog/dialog.spec.ts[2m > [22m[2mDialogDirective[2m > [22m[2mshould close on backdrop click when closeOnBackdropClick=true
+[22m[39mNG0303: Can't bind to 'open' since it isn't a known property of 'div' (used in the 'TestDialogComponent' component template).
+1. If 'div' is an Angular component and it has the 'open' input, then verify that it is included in the '@Component.imports' of this component.
+2. To allow any property add 'NO_ERRORS_SCHEMA' to the '@Component.schemas' of this component.
+NG0303: Can't bind to 'modal' since it isn't a known property of 'div' (used in the 'TestDialogComponent' component template).
+1. If 'div' is an Angular component and it has the 'modal' input, then verify that it is included in the '@Component.imports' of this component.
+2. To allow any property add 'NO_ERRORS_SCHEMA' to the '@Component.schemas' of this component.
+NG0303: Can't bind to 'closeOnBackdropClick' since it isn't a known property of 'div' (used in the 'TestDialogComponent' component template).
+1. If 'div' is an Angular component and it has the 'closeOnBackdropClick' input, then verify that it is included in the '@Component.imports' of this component.
+2. To allow any property add 'NO_ERRORS_SCHEMA' to the '@Component.schemas' of this component.
+NG0303: Can't bind to 'closeOnEscape' since it isn't a known property of 'div' (used in the 'TestDialogComponent' component template).
+1. If 'div' is an Angular component and it has the 'closeOnEscape' input, then verify that it is included in the '@Component.imports' of this component.
+2. To allow any property add 'NO_ERRORS_SCHEMA' to the '@Component.schemas' of this component.
+
+[90mstderr[2m | projects/primitives/src/lib/dialog/dialog.spec.ts[2m > [22m[2mDialogDirective[2m > [22m[2mshould NOT close on backdrop click when closeOnBackdropClick=false
+[22m[39mNG0303: Can't bind to 'open' since it isn't a known property of 'div' (used in the 'TestDialogComponent' component template).
+1. If 'div' is an Angular component and it has the 'open' input, then verify that it is included in the '@Component.imports' of this component.
+2. To allow any property add 'NO_ERRORS_SCHEMA' to the '@Component.schemas' of this component.
+NG0303: Can't bind to 'modal' since it isn't a known property of 'div' (used in the 'TestDialogComponent' component template).
+1. If 'div' is an Angular component and it has the 'modal' input, then verify that it is included in the '@Component.imports' of this component.
+2. To allow any property add 'NO_ERRORS_SCHEMA' to the '@Component.schemas' of this component.
+NG0303: Can't bind to 'closeOnBackdropClick' since it isn't a known property of 'div' (used in the 'TestDialogComponent' component template).
+1. If 'div' is an Angular component and it has the 'closeOnBackdropClick' input, then verify that it is included in the '@Component.imports' of this component.
+2. To allow any property add 'NO_ERRORS_SCHEMA' to the '@Component.schemas' of this component.
+NG0303: Can't bind to 'closeOnEscape' since it isn't a known property of 'div' (used in the 'TestDialogComponent' component template).
+1. If 'div' is an Angular component and it has the 'closeOnEscape' input, then verify that it is included in the '@Component.imports' of this component.
+2. To allow any property add 'NO_ERRORS_SCHEMA' to the '@Component.schemas' of this component.
+
+[90mstderr[2m | projects/primitives/src/lib/dialog/dialog.spec.ts[2m > [22m[2mDialogDirective[2m > [22m[2mshould close on Escape when closeOnEscape=true
+[22m[39mNG0303: Can't bind to 'open' since it isn't a known property of 'div' (used in the 'TestDialogComponent' component template).
+1. If 'div' is an Angular component and it has the 'open' input, then verify that it is included in the '@Component.imports' of this component.
+2. To allow any property add 'NO_ERRORS_SCHEMA' to the '@Component.schemas' of this component.
+NG0303: Can't bind to 'modal' since it isn't a known property of 'div' (used in the 'TestDialogComponent' component template).
+1. If 'div' is an Angular component and it has the 'modal' input, then verify that it is included in the '@Component.imports' of this component.
+2. To allow any property add 'NO_ERRORS_SCHEMA' to the '@Component.schemas' of this component.
+NG0303: Can't bind to 'closeOnBackdropClick' since it isn't a known property of 'div' (used in the 'TestDialogComponent' component template).
+1. If 'div' is an Angular component and it has the 'closeOnBackdropClick' input, then verify that it is included in the '@Component.imports' of this component.
+2. To allow any property add 'NO_ERRORS_SCHEMA' to the '@Component.schemas' of this component.
+NG0303: Can't bind to 'closeOnEscape' since it isn't a known property of 'div' (used in the 'TestDialogComponent' component template).
+1. If 'div' is an Angular component and it has the 'closeOnEscape' input, then verify that it is included in the '@Component.imports' of this component.
+2. To allow any property add 'NO_ERRORS_SCHEMA' to the '@Component.schemas' of this component.
+
+[90mstderr[2m | projects/primitives/src/lib/dialog/dialog.spec.ts[2m > [22m[2mDialogDirective[2m > [22m[2mshould NOT close on Escape when closeOnEscape=false
+[22m[39mNG0303: Can't bind to 'open' since it isn't a known property of 'div' (used in the 'TestDialogComponent' component template).
+1. If 'div' is an Angular component and it has the 'open' input, then verify that it is included in the '@Component.imports' of this component.
+2. To allow any property add 'NO_ERRORS_SCHEMA' to the '@Component.schemas' of this component.
+NG0303: Can't bind to 'modal' since it isn't a known property of 'div' (used in the 'TestDialogComponent' component template).
+1. If 'div' is an Angular component and it has the 'modal' input, then verify that it is included in the '@Component.imports' of this component.
+2. To allow any property add 'NO_ERRORS_SCHEMA' to the '@Component.schemas' of this component.
+NG0303: Can't bind to 'closeOnBackdropClick' since it isn't a known property of 'div' (used in the 'TestDialogComponent' component template).
+1. If 'div' is an Angular component and it has the 'closeOnBackdropClick' input, then verify that it is included in the '@Component.imports' of this component.
+2. To allow any property add 'NO_ERRORS_SCHEMA' to the '@Component.schemas' of this component.
+NG0303: Can't bind to 'closeOnEscape' since it isn't a known property of 'div' (used in the 'TestDialogComponent' component template).
+1. If 'div' is an Angular component and it has the 'closeOnEscape' input, then verify that it is included in the '@Component.imports' of this component.
+2. To allow any property add 'NO_ERRORS_SCHEMA' to the '@Component.schemas' of this component.
+
+[90mstderr[2m | projects/primitives/src/lib/dialog/dialog.spec.ts[2m > [22m[2mDialogDirective[2m > [22m[2mshould set data-state="open" on panel and overlay when open
+[22m[39mNG0303: Can't bind to 'open' since it isn't a known property of 'div' (used in the 'TestDialogComponent' component template).
+1. If 'div' is an Angular component and it has the 'open' input, then verify that it is included in the '@Component.imports' of this component.
+2. To allow any property add 'NO_ERRORS_SCHEMA' to the '@Component.schemas' of this component.
+NG0303: Can't bind to 'modal' since it isn't a known property of 'div' (used in the 'TestDialogComponent' component template).
+1. If 'div' is an Angular component and it has the 'modal' input, then verify that it is included in the '@Component.imports' of this component.
+2. To allow any property add 'NO_ERRORS_SCHEMA' to the '@Component.schemas' of this component.
+NG0303: Can't bind to 'closeOnBackdropClick' since it isn't a known property of 'div' (used in the 'TestDialogComponent' component template).
+1. If 'div' is an Angular component and it has the 'closeOnBackdropClick' input, then verify that it is included in the '@Component.imports' of this component.
+2. To allow any property add 'NO_ERRORS_SCHEMA' to the '@Component.schemas' of this component.
+NG0303: Can't bind to 'closeOnEscape' since it isn't a known property of 'div' (used in the 'TestDialogComponent' component template).
+1. If 'div' is an Angular component and it has the 'closeOnEscape' input, then verify that it is included in the '@Component.imports' of this component.
+2. To allow any property add 'NO_ERRORS_SCHEMA' to the '@Component.schemas' of this component.
+
+ [31m❯[39m projects/primitives/src/lib/dialog/dialog.spec.ts [2m([22m[2m22 tests[22m[2m | [22m[31m21 failed[39m[2m)[22m[32m 65[2mms[22m[39m
+[31m     [31m×[31m should render with dialog closed by default[39m[32m 30[2mms[22m[39m
+[31m     [31m×[31m should set data-state="closed" initially[39m[32m 4[2mms[22m[39m
+[31m     [31m×[31m should set role="dialog" on the panel[39m[32m 3[2mms[22m[39m
+[31m     [31m×[31m should set role="alertdialog" when configured[39m[32m 3[2mms[22m[39m
+[31m     [31m×[31m should set aria-modal="true" in modal mode[39m[32m 2[2mms[22m[39m
+[31m     [31m×[31m should not set aria-modal when modal=false[39m[32m 2[2mms[22m[39m
+[31m     [31m×[31m should wire aria-labelledby to the title element id[39m[32m 2[2mms[22m[39m
+[31m     [31m×[31m should wire aria-describedby to the description element id[39m[32m 1[2mms[22m[39m
+[31m     [31m×[31m should wire aria-controls on trigger to panel id[39m[32m 1[2mms[22m[39m
+     [32m✓[39m should set aria-haspopup="dialog" on the trigger[32m 2[2mms[22m[39m
+[31m     [31m×[31m should update aria-expanded on trigger when dialog opens[39m[32m 1[2mms[22m[39m
+[31m     [31m×[31m should open dialog when trigger is clicked[39m[32m 1[2mms[22m[39m
+[31m     [31m×[31m should close dialog when close button is clicked[39m[32m 1[2mms[22m[39m
+[31m     [31m×[31m should emit openChange when dialog opens[39m[32m 1[2mms[22m[39m
+[31m     [31m×[31m should emit openChange(false) when dialog closes[39m[32m 1[2mms[22m[39m
+[31m     [31m×[31m should open when [open] input is set to true[39m[32m 1[2mms[22m[39m
+[31m     [31m×[31m should close when [open] input is set to false[39m[32m 1[2mms[22m[39m
+[31m     [31m×[31m should close on backdrop click when closeOnBackdropClick=true[39m[32m 1[2mms[22m[39m
+[31m     [31m×[31m should NOT close on backdrop click when closeOnBackdropClick=false[39m[32m 1[2mms[22m[39m
+[31m     [31m×[31m should close on Escape when closeOnEscape=true[39m[32m 1[2mms[22m[39m
+[31m     [31m×[31m should NOT close on Escape when closeOnEscape=false[39m[32m 1[2mms[22m[39m
+[31m     [31m×[31m should set data-state="open" on panel and overlay when open[39m[32m 1[2mms[22m[39m
+
+[31m⎯⎯⎯⎯⎯⎯[39m[1m[41m Failed Tests 21 [49m[22m[31m⎯⎯⎯⎯⎯⎯⎯[39m
+
+[41m[1m FAIL [22m[49m projects/primitives/src/lib/dialog/dialog.spec.ts[2m > [22mDialogDirective[2m > [22mshould render with dialog closed by default
+[31m[1mTypeError[22m: Cannot read properties of null (reading 'hasAttribute')[39m
+[36m [2m❯[22m projects/primitives/src/lib/dialog/dialog.spec.ts:[2m94:28[22m[39m
+    [90m 92|[39m
+    [90m 93|[39m   [34mit[39m([32m'should render with dialog closed by default'[39m[33m,[39m () [33m=>[39m {
+    [90m 94|[39m     [34mexpect[39m([34mgetPanel[39m(fixture)[33m.[39m[34mhasAttribute[39m([32m'hidden'[39m))[33m.[39m[34mtoBe[39m([35mtrue[39m)[33m;[39m
+    [90m   |[39m                            [31m^[39m
+    [90m 95|[39m     [34mexpect[39m([34mgetOverlay[39m(fixture)[33m.[39m[34mhasAttribute[39m([32m'hidden'[39m))[33m.[39m[34mtoBe[39m([35mtrue[39m)[33m;[39m
+    [90m 96|[39m   })[33m;[39m
+[90m [2m❯[22m new ZoneAwarePromise node_modules/zone.js/fesm2015/zone.js:[2m2221:23[22m[39m
+[90m [2m❯[22m new ZoneAwarePromise node_modules/zone.js/fesm2015/zone.js:[2m2221:23[22m[39m
+
+[31m[2m⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯[1/21]⎯[22m[39m
+
+[41m[1m FAIL [22m[49m projects/primitives/src/lib/dialog/dialog.spec.ts[2m > [22mDialogDirective[2m > [22mshould set data-state="closed" initially
+[31m[1mTypeError[22m: Cannot read properties of null (reading 'getAttribute')[39m
+[36m [2m❯[22m projects/primitives/src/lib/dialog/dialog.spec.ts:[2m99:28[22m[39m
+    [90m 97|[39m
+    [90m 98|[39m   [34mit[39m([32m'should set data-state="closed" initially'[39m[33m,[39m () [33m=>[39m {
+    [90m 99|[39m     expect(getPanel(fixture).getAttribute('data-state')).toBe('closed'…
+    [90m   |[39m                            [31m^[39m
+    [90m100|[39m     expect(getOverlay(fixture).getAttribute('data-state')).toBe('close…
+    [90m101|[39m   })[33m;[39m
+[90m [2m❯[22m new ZoneAwarePromise node_modules/zone.js/fesm2015/zone.js:[2m2221:23[22m[39m
+[90m [2m❯[22m new ZoneAwarePromise node_modules/zone.js/fesm2015/zone.js:[2m2221:23[22m[39m
+
+[31m[2m⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯[2/21]⎯[22m[39m
+
+[41m[1m FAIL [22m[49m projects/primitives/src/lib/dialog/dialog.spec.ts[2m > [22mDialogDirective[2m > [22mshould set role="dialog" on the panel
+[31m[1mTypeError[22m: Cannot read properties of null (reading 'getAttribute')[39m
+[36m [2m❯[22m projects/primitives/src/lib/dialog/dialog.spec.ts:[2m108:28[22m[39m
+    [90m106|[39m
+    [90m107|[39m   [34mit[39m([32m'should set role="dialog" on the panel'[39m[33m,[39m () [33m=>[39m {
+    [90m108|[39m     [34mexpect[39m([34mgetPanel[39m(fixture)[33m.[39m[34mgetAttribute[39m([32m'role'[39m))[33m.[39m[34mtoBe[39m([32m'dialog'[39m)[33m;[39m
+    [90m   |[39m                            [31m^[39m
+    [90m109|[39m   })[33m;[39m
+    [90m110|[39m
+[90m [2m❯[22m new ZoneAwarePromise node_modules/zone.js/fesm2015/zone.js:[2m2221:23[22m[39m
+[90m [2m❯[22m new ZoneAwarePromise node_modules/zone.js/fesm2015/zone.js:[2m2221:23[22m[39m
+
+[31m[2m⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯[3/21]⎯[22m[39m
+
+[41m[1m FAIL [22m[49m projects/primitives/src/lib/dialog/dialog.spec.ts[2m > [22mDialogDirective[2m > [22mshould set role="alertdialog" when configured
+[31m[1mError[22m: NG0100: ExpressionChangedAfterItHasBeenCheckedError: Expression has changed after it was checked. Previous value for 'role': 'dialog'. Current value: 'alertdialog'. Expression location: TestDialogComponent component. Find more at https://v21.angular.dev/errors/NG0100[39m
+[90m [2m❯[22m throwErrorIfNoChangesMode ../../Angular%20Projects/angular-primitives/node_modules/@angular/core/fesm2022/_debug_node-chunk.mjs:[2m3534:9[22m[39m
+[90m [2m❯[22m bindingUpdated ../../Angular%20Projects/angular-primitives/node_modules/@angular/core/fesm2022/_debug_node-chunk.mjs:[2m8165:9[22m[39m
+[90m [2m❯[22m ɵɵproperty ../../Angular%20Projects/angular-primitives/node_modules/@angular/core/fesm2022/_debug_node-chunk.mjs:[2m14121:7[22m[39m
+[90m [2m❯[22m TestDialogComponent_Template ng:/TestDialogComponent.js:[2m31:71[22m[39m
+[90m [2m❯[22m executeTemplate ../../Angular%20Projects/angular-primitives/node_modules/@angular/core/fesm2022/_debug_node-chunk.mjs:[2m5081:5[22m[39m
+[90m [2m❯[22m refreshView ../../Angular%20Projects/angular-primitives/node_modules/@angular/core/fesm2022/_debug_node-chunk.mjs:[2m5751:7[22m[39m
+[90m [2m❯[22m detectChangesInView ../../Angular%20Projects/angular-primitives/node_modules/@angular/core/fesm2022/_debug_node-chunk.mjs:[2m5891:5[22m[39m
+[90m [2m❯[22m detectChangesInViewIfAttached ../../Angular%20Projects/angular-primitives/node_modules/@angular/core/fesm2022/_debug_node-chunk.mjs:[2m5874:3[22m[39m
+[90m [2m❯[22m detectChangesInComponent ../../Angular%20Projects/angular-primitives/node_modules/@angular/core/fesm2022/_debug_node-chunk.mjs:[2m5865:5[22m[39m
+[90m [2m❯[22m detectChangesInChildComponents ../../Angular%20Projects/angular-primitives/node_modules/@angular/core/fesm2022/_debug_node-chunk.mjs:[2m5913:5[22m[39m
+
+[31m[2m⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯[4/21]⎯[22m[39m
+
+[41m[1m FAIL [22m[49m projects/primitives/src/lib/dialog/dialog.spec.ts[2m > [22mDialogDirective[2m > [22mshould set aria-modal="true" in modal mode
+[31m[1mTypeError[22m: Cannot read properties of null (reading 'getAttribute')[39m
+[36m [2m❯[22m projects/primitives/src/lib/dialog/dialog.spec.ts:[2m118:28[22m[39m
+    [90m116|[39m
+    [90m117|[39m   [34mit[39m([32m'should set aria-modal="true" in modal mode'[39m[33m,[39m () [33m=>[39m {
+    [90m118|[39m     [34mexpect[39m([34mgetPanel[39m(fixture)[33m.[39m[34mgetAttribute[39m([32m'aria-modal'[39m))[33m.[39m[34mtoBe[39m([32m'true'[39m)[33m;[39m
+    [90m   |[39m                            [31m^[39m
+    [90m119|[39m   })[33m;[39m
+    [90m120|[39m
+[90m [2m❯[22m new ZoneAwarePromise node_modules/zone.js/fesm2015/zone.js:[2m2221:23[22m[39m
+[90m [2m❯[22m new ZoneAwarePromise node_modules/zone.js/fesm2015/zone.js:[2m2221:23[22m[39m
+
+[31m[2m⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯[5/21]⎯[22m[39m
+
+[41m[1m FAIL [22m[49m projects/primitives/src/lib/dialog/dialog.spec.ts[2m > [22mDialogDirective[2m > [22mshould not set aria-modal when modal=false
+[31m[1mError[22m: NG0100: ExpressionChangedAfterItHasBeenCheckedError: Expression has changed after it was checked. Previous value for 'modal': 'true'. Current value: 'false'. Expression location: TestDialogComponent component. Find more at https://v21.angular.dev/errors/NG0100[39m
+[90m [2m❯[22m throwErrorIfNoChangesMode ../../Angular%20Projects/angular-primitives/node_modules/@angular/core/fesm2022/_debug_node-chunk.mjs:[2m3534:9[22m[39m
+[90m [2m❯[22m bindingUpdated ../../Angular%20Projects/angular-primitives/node_modules/@angular/core/fesm2022/_debug_node-chunk.mjs:[2m8165:9[22m[39m
+[90m [2m❯[22m ɵɵproperty ../../Angular%20Projects/angular-primitives/node_modules/@angular/core/fesm2022/_debug_node-chunk.mjs:[2m14121:7[22m[39m
+[90m [2m❯[22m TestDialogComponent_Template ng:/TestDialogComponent.js:[2m30:64[22m[39m
+[90m [2m❯[22m executeTemplate ../../Angular%20Projects/angular-primitives/node_modules/@angular/core/fesm2022/_debug_node-chunk.mjs:[2m5081:5[22m[39m
+[90m [2m❯[22m refreshView ../../Angular%20Projects/angular-primitives/node_modules/@angular/core/fesm2022/_debug_node-chunk.mjs:[2m5751:7[22m[39m
+[90m [2m❯[22m detectChangesInView ../../Angular%20Projects/angular-primitives/node_modules/@angular/core/fesm2022/_debug_node-chunk.mjs:[2m5891:5[22m[39m
+[90m [2m❯[22m detectChangesInViewIfAttached ../../Angular%20Projects/angular-primitives/node_modules/@angular/core/fesm2022/_debug_node-chunk.mjs:[2m5874:3[22m[39m
+[90m [2m❯[22m detectChangesInComponent ../../Angular%20Projects/angular-primitives/node_modules/@angular/core/fesm2022/_debug_node-chunk.mjs:[2m5865:5[22m[39m
+[90m [2m❯[22m detectChangesInChildComponents ../../Angular%20Projects/angular-primitives/node_modules/@angular/core/fesm2022/_debug_node-chunk.mjs:[2m5913:5[22m[39m
+
+[31m[2m⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯[6/21]⎯[22m[39m
+
+[41m[1m FAIL [22m[49m projects/primitives/src/lib/dialog/dialog.spec.ts[2m > [22mDialogDirective[2m > [22mshould wire aria-labelledby to the title element id
+[31m[1mTypeError[22m: Cannot read properties of null (reading 'getAttribute')[39m
+[36m [2m❯[22m projects/primitives/src/lib/dialog/dialog.spec.ts:[2m129:27[22m[39m
+    [90m127|[39m   [34mit[39m([32m'should wire aria-labelledby to the title element id'[39m[33m,[39m () [33m=>[39m {
+    [90m128|[39m     [35mconst[39m panel [33m=[39m [34mgetPanel[39m(fixture)[33m;[39m
+    [90m129|[39m     [35mconst[39m titleId [33m=[39m panel[33m.[39m[34mgetAttribute[39m([32m'aria-labelledby'[39m)[33m![39m[33m;[39m
+    [90m   |[39m                           [31m^[39m
+    [90m130|[39m     [35mconst[39m titleEl [33m=[39m fixture[33m.[39mnativeElement[33m.[39m[34mquerySelector[39m([32m`#title-el`[39m)[33m;[39m
+    [90m131|[39m     [34mexpect[39m(titleEl[33m.[39mid)[33m.[39m[34mtoBe[39m(titleId)[33m;[39m
+[90m [2m❯[22m new ZoneAwarePromise node_modules/zone.js/fesm2015/zone.js:[2m2221:23[22m[39m
+[90m [2m❯[22m new ZoneAwarePromise node_modules/zone.js/fesm2015/zone.js:[2m2221:23[22m[39m
+
+[31m[2m⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯[7/21]⎯[22m[39m
+
+[41m[1m FAIL [22m[49m projects/primitives/src/lib/dialog/dialog.spec.ts[2m > [22mDialogDirective[2m > [22mshould wire aria-describedby to the description element id
+[31m[1mTypeError[22m: Cannot read properties of null (reading 'getAttribute')[39m
+[36m [2m❯[22m projects/primitives/src/lib/dialog/dialog.spec.ts:[2m136:26[22m[39m
+    [90m134|[39m   it('should wire aria-describedby to the description element id', () …
+    [90m135|[39m     [35mconst[39m panel [33m=[39m [34mgetPanel[39m(fixture)[33m;[39m
+    [90m136|[39m     [35mconst[39m descId [33m=[39m panel[33m.[39m[34mgetAttribute[39m([32m'aria-describedby'[39m)[33m![39m[33m;[39m
+    [90m   |[39m                          [31m^[39m
+    [90m137|[39m     [35mconst[39m descEl [33m=[39m fixture[33m.[39mnativeElement[33m.[39m[34mquerySelector[39m([32m'#desc-el'[39m)[33m;[39m
+    [90m138|[39m     [34mexpect[39m(descEl[33m.[39mid)[33m.[39m[34mtoBe[39m(descId)[33m;[39m
+[90m [2m❯[22m new ZoneAwarePromise node_modules/zone.js/fesm2015/zone.js:[2m2221:23[22m[39m
+[90m [2m❯[22m new ZoneAwarePromise node_modules/zone.js/fesm2015/zone.js:[2m2221:23[22m[39m
+
+[31m[2m⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯[8/21]⎯[22m[39m
+
+[41m[1m FAIL [22m[49m projects/primitives/src/lib/dialog/dialog.spec.ts[2m > [22mDialogDirective[2m > [22mshould wire aria-controls on trigger to panel id
+[31m[1mTypeError[22m: Cannot read properties of null (reading 'id')[39m
+[36m [2m❯[22m projects/primitives/src/lib/dialog/dialog.spec.ts:[2m144:28[22m[39m
+    [90m142|[39m     [35mconst[39m trigger [33m=[39m [34mgetTrigger[39m(fixture)[33m;[39m
+    [90m143|[39m     [35mconst[39m panelId [33m=[39m trigger[33m.[39m[34mgetAttribute[39m([32m'aria-controls'[39m)[33m;[39m
+    [90m144|[39m     [34mexpect[39m([34mgetPanel[39m(fixture)[33m.[39mid)[33m.[39m[34mtoBe[39m(panelId[33m![39m)[33m;[39m
+    [90m   |[39m                            [31m^[39m
+    [90m145|[39m   })[33m;[39m
+    [90m146|[39m
+[90m [2m❯[22m new ZoneAwarePromise node_modules/zone.js/fesm2015/zone.js:[2m2221:23[22m[39m
+[90m [2m❯[22m new ZoneAwarePromise node_modules/zone.js/fesm2015/zone.js:[2m2221:23[22m[39m
+
+[31m[2m⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯[9/21]⎯[22m[39m
+
+[41m[1m FAIL [22m[49m projects/primitives/src/lib/dialog/dialog.spec.ts[2m > [22mDialogDirective[2m > [22mshould update aria-expanded on trigger when dialog opens
+[41m[1m FAIL [22m[49m projects/primitives/src/lib/dialog/dialog.spec.ts[2m > [22mDialogDirective[2m > [22mshould open dialog when trigger is clicked
+[41m[1m FAIL [22m[49m projects/primitives/src/lib/dialog/dialog.spec.ts[2m > [22mDialogDirective[2m > [22mshould close dialog when close button is clicked
+[41m[1m FAIL [22m[49m projects/primitives/src/lib/dialog/dialog.spec.ts[2m > [22mDialogDirective[2m > [22mshould emit openChange when dialog opens
+[41m[1m FAIL [22m[49m projects/primitives/src/lib/dialog/dialog.spec.ts[2m > [22mDialogDirective[2m > [22mshould emit openChange(false) when dialog closes
+[41m[1m FAIL [22m[49m projects/primitives/src/lib/dialog/dialog.spec.ts[2m > [22mDialogDirective[2m > [22mshould open when [open] input is set to true
+[41m[1m FAIL [22m[49m projects/primitives/src/lib/dialog/dialog.spec.ts[2m > [22mDialogDirective[2m > [22mshould close when [open] input is set to false
+[41m[1m FAIL [22m[49m projects/primitives/src/lib/dialog/dialog.spec.ts[2m > [22mDialogDirective[2m > [22mshould close on backdrop click when closeOnBackdropClick=true
+[41m[1m FAIL [22m[49m projects/primitives/src/lib/dialog/dialog.spec.ts[2m > [22mDialogDirective[2m > [22mshould NOT close on backdrop click when closeOnBackdropClick=false
+[41m[1m FAIL [22m[49m projects/primitives/src/lib/dialog/dialog.spec.ts[2m > [22mDialogDirective[2m > [22mshould close on Escape when closeOnEscape=true
+[41m[1m FAIL [22m[49m projects/primitives/src/lib/dialog/dialog.spec.ts[2m > [22mDialogDirective[2m > [22mshould NOT close on Escape when closeOnEscape=false
+[41m[1m FAIL [22m[49m projects/primitives/src/lib/dialog/dialog.spec.ts[2m > [22mDialogDirective[2m > [22mshould set data-state="open" on panel and overlay when open
+[31m[1mError[22m: Expected to be running in 'ProxyZone', but it was not found.[39m
+[90m [2m❯[22m _ProxyZoneSpec.assertPresent node_modules/zone.js/fesm2015/zone-testing.js:[2m882:13[22m[39m
+[90m [2m❯[22m fakeAsyncFn node_modules/zone.js/fesm2015/zone-testing.js:[2m1647:42[22m[39m
+[90m [2m❯[22m new ZoneAwarePromise node_modules/zone.js/fesm2015/zone.js:[2m2221:23[22m[39m
+[90m [2m❯[22m new ZoneAwarePromise node_modules/zone.js/fesm2015/zone.js:[2m2221:23[22m[39m
+
+[31m[2m⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯[10/21]⎯[22m[39m
+
+
+[2m Test Files [22m [1m[31m1 failed[39m[22m[90m (1)[39m
+[2m      Tests [22m [1m[31m21 failed[39m[22m[2m | [22m[1m[32m1 passed[39m[22m[90m (22)[39m
+[2m   Start at [22m 02:08:58
+[2m   Duration [22m 468ms[2m (transform 53ms, setup 117ms, import 41ms, tests 65ms, environment 176ms)[22m
+

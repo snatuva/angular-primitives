@@ -2,11 +2,11 @@ import {
   Directive,
   model,
   input,
-  signal,
   computed,
   OnDestroy,
   inject,
 } from '@angular/core';
+import { UniqueIdService } from './unique-id.service';
 
 let nextId = 0;
 
