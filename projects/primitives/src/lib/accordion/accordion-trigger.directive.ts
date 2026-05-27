@@ -59,10 +59,10 @@ export class AccordionTriggerDirective implements AfterViewInit {
   readonly dataState = computed(() => this.item.dataState());
 
   /** ID applied to the trigger element — referenced by the panel's aria-labelledby */
-  readonly triggerId = computed(() => `ap-accordion-trigger-${this.item.id}`);
+  readonly triggerId = computed(() => `ap-accordion-trigger-${this.item.id()}`);
 
   /** ID of the associated panel — applied to aria-controls */
-  readonly panelId = computed(() => `ap-accordion-panel-${this.item.id}`);
+  readonly panelId = computed(() => `ap-accordion-panel-${this.item.id()}`);
 
   ngAfterViewInit(): void {
     // Ensure the native element has the correct id (host binding handles it,
@@ -76,7 +76,7 @@ export class AccordionTriggerDirective implements AfterViewInit {
   }
 
   onKeydown(event: KeyboardEvent): void {
-    const isVertical = this.accordion.orientation === 'vertical';
+    const isVertical = this.accordion.orientation() === 'vertical';
 
     switch (event.key) {
       case 'ArrowDown':

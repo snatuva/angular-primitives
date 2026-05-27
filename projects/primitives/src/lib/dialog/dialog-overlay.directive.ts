@@ -57,7 +57,7 @@ export class DialogOverlayDirective {
     // not on child elements (i.e. the dialog panel content).
     if (
       event.target === event.currentTarget &&
-      this.dialog.closeOnBackdropClick
+      this.dialog.closeOnBackdropClick()
     ) {
       this.dialog.closeDialog();
     }

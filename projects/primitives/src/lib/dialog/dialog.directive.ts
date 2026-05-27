@@ -1,8 +1,7 @@
 import {
   Directive,
-  Input,
-  Output,
-  EventEmitter,
+  model,
+  input,
   signal,
   computed,
   OnDestroy,
@@ -46,71 +45,62 @@ export class DialogDirective implements OnDestroy {
    * Two-way binding for open state (controlled mode).
    * When provided, the host component owns the state.
    */
-  @Input() set open(value: boolean) {
-    this._open.set(value);
-  }
-
-  @Output() openChange = new EventEmitter<boolean>();
+  readonly open = model(false);
 
   /**
    * Whether the dialog is modal.
    * Modal dialogs trap focus and prevent interaction with content behind them.
    * @default true
    */
-  @Input() modal = true;
+  readonly modal = input(true);
 
   /**
    * Whether clicking the backdrop (overlay) closes the dialog.
    * Has no effect when modal=false.
    * @default true
    */
-  @Input() closeOnBackdropClick = true;
+  readonly closeOnBackdropClick = input(true);
 
   /**
    * Whether pressing Escape closes the dialog.
    * @default true
    */
-  @Input() closeOnEscape = true;
+  readonly closeOnEscape = input(true);
 
   /**
    * ARIA role for the dialog panel.
    * Use 'alertdialog' for destructive confirmations that require immediate attention.
    * @default 'dialog'
    */
-  @Input() role: 'dialog' | 'alertdialog' = 'dialog';
+  readonly role = input<'dialog' | 'alertdialog'>('dialog');
 
   /** Unique id used to wire aria-labelledby / aria-describedby */
   readonly dialogId = `ap-dialog-${nextId++}`;
 
-  /** Internal open state signal */
-  private readonly _open = signal(false);
-
   /** Read-only computed open state for child directives */
-  readonly isOpen = computed(() => this._open());
+  readonly isOpen = computed(() => this.open());
 
   ngOnDestroy(): void {
     // Ensure cleanup if dialog is open when the component is destroyed
-    if (this._open()) {
-      this._open.set(false);
+    if (this.open()) {
+      this.open.set(false);
     }
   }
 
   /** Opens the dialog */
   openDialog(): void {
-    if (this._open()) return;
-    this._open.set(true);
-    this.openChange.emit(true);
+    if (this.open()) return;
+    this.open.set(true);
   }
 
   /** Closes the dialog */
   closeDialog(): void {
-    if (!this._open()) return;
-    this._open.set(false);
-    this.openChange.emit(false);
+    if (!this.open()) return;
+    this.open.set(false);
   }
 
   /** Toggles the dialog open/close */
   toggle(): void {
-    this._open() ? this.closeDialog() : this.openDialog();
+    this.open() ? this.closeDialog() : this.openDialog();
   }
 }

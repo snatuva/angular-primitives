@@ -245,7 +245,7 @@ describe('DialogDirective', () => {
     overlay.dispatchEvent(event);
     fixture.detectChanges();
 
-    expect(getPanel(fixture).hasAttribute('hidden')).toBeTrue();
+    expect(getPanel(fixture).hasAttribute('hidden')).toBe(true);
   }));
 
   it('should NOT close on backdrop click when closeOnBackdropClick=false', fakeAsync(() => {

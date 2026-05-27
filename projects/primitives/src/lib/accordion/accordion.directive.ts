@@ -1,10 +1,10 @@
 import {
   Directive,
-  Input,
+  input,
   computed,
   signal,
-  OnChanges,
-  SimpleChanges,
+  effect,
+  OnInit,
 } from '@angular/core';
 import { AccordionType, AccordionOrientation } from './accordion.types';
 
@@ -27,48 +27,48 @@ import { AccordionType, AccordionOrientation } from './accordion.types';
   standalone: true,
   exportAs: 'apAccordion',
   host: {
-    '[attr.data-orientation]': 'orientation',
+    '[attr.data-orientation]': 'orientation()',
   },
 })
-export class AccordionDirective implements OnChanges {
+export class AccordionDirective implements OnInit {
   /**
    * Whether one or multiple items can be open simultaneously.
    * @default 'single'
    */
-  @Input() type: AccordionType = 'single';
+  readonly type = input<AccordionType>('single');
 
   /**
    * Orientation of the accordion.
    * Affects keyboard interaction (Up/Down vs Left/Right arrow keys).
    * @default 'vertical'
    */
-  @Input() orientation: AccordionOrientation = 'vertical';
+  readonly orientation = input<AccordionOrientation>('vertical');
 
   /**
    * When type="single", allows the open item to be collapsed.
    * When type="multiple", this has no effect (items are always collapsible).
    * @default false
    */
-  @Input() collapsible = false;
+  readonly collapsible = input(false);
 
   /**
    * Disables all accordion items.
    * Individual items can still be disabled independently.
    * @default false
    */
-  @Input() disabled = false;
+  readonly disabled = input(false);
 
   /**
    * The id(s) of the item(s) that should be expanded by default (uncontrolled).
    */
-  @Input() defaultValue: string | string[] | null = null;
+  readonly defaultValue = input<string | string[] | null>(null);
 
   /**
    * Controlled expanded value. Pass a string for type="single",
    * or a string[] for type="multiple".
    * When provided, you must also handle (valueChange) to update it.
    */
-  @Input() value: string | string[] | null = null;
+  readonly value = input<string | string[] | null>(null);
 
   /** Internal expanded state */
   private readonly _expandedIds = signal<Set<string>>(new Set());
@@ -76,20 +76,26 @@ export class AccordionDirective implements OnChanges {
   /** Read-only signal exposing currently expanded item ids */
   readonly expandedIds = computed(() => this._expandedIds());
 
-  ngOnChanges(changes: SimpleChanges): void {
+  ngOnInit(): void {
     // Sync controlled `value` input into internal signal
-    if (changes['value'] && this.value !== null) {
-      const ids = Array.isArray(this.value) ? this.value : [this.value];
-      this._expandedIds.set(new Set(ids));
-    }
+    effect(() => {
+      const value = this.value();
+      if (value !== null) {
+        const ids = Array.isArray(value) ? value : [value];
+        this._expandedIds.set(new Set(ids));
+      }
+    });
 
     // Seed default value once on first render (uncontrolled mode)
-    if (changes['defaultValue'] && this.defaultValue !== null && this.value === null) {
-      const ids = Array.isArray(this.defaultValue)
-        ? this.defaultValue
-        : [this.defaultValue];
-      this._expandedIds.set(new Set(ids));
-    }
+    effect(() => {
+      const defaultValue = this.defaultValue();
+      if (defaultValue !== null && this.value() === null) {
+        const ids = Array.isArray(defaultValue)
+          ? defaultValue
+          : [defaultValue];
+        this._expandedIds.set(new Set(ids));
+      }
+    });
   }
 
   /** Returns true if the given item id is currently expanded */
@@ -102,15 +108,15 @@ export class AccordionDirective implements OnChanges {
    * Respects `type` and `collapsible` constraints.
    */
   toggle(id: string): void {
-    if (this.disabled) return;
+    if (this.disabled()) return;
 
     const current = this._expandedIds();
     const isOpen = current.has(id);
 
-    if (this.type === 'single') {
+    if (this.type() === 'single') {
       if (isOpen) {
         // Only collapse if collapsible is true
-        if (this.collapsible) {
+        if (this.collapsible()) {
           this._expandedIds.set(new Set());
         }
       } else {
@@ -126,11 +132,11 @@ export class AccordionDirective implements OnChanges {
 
   /** Expand a specific item (no-op if already expanded or disabled) */
   expand(id: string): void {
-    if (this.disabled) return;
+    if (this.disabled()) return;
     const current = this._expandedIds();
     if (current.has(id)) return;
 
-    if (this.type === 'single') {
+    if (this.type() === 'single') {
       this._expandedIds.set(new Set([id]));
     } else {
       this._expandedIds.set(new Set([...current, id]));

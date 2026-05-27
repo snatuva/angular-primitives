@@ -56,9 +56,9 @@ export class DialogContentDirective implements OnDestroy {
 
   private focusTrap: FocusTrap | null = null;
 
-  readonly isOpen = computed(() => this.dialog.isOpen());
-  readonly isModal = computed(() => this.dialog.modal);
-  readonly role = computed(() => this.dialog.role);
+  readonly isOpen = this.dialog.isOpen;
+  readonly isModal = computed(() => this.dialog.modal());
+  readonly role = computed(() => this.dialog.role());
   readonly dataState = computed(() => (this.isOpen() ? 'open' : 'closed'));
   readonly panelId = computed(() => `${this.dialog.dialogId}-panel`);
   readonly titleId = computed(() => `${this.dialog.dialogId}-title`);
@@ -80,7 +80,7 @@ export class DialogContentDirective implements OnDestroy {
   }
 
   private onOpen(): void {
-    if (this.dialog.modal) {
+    if (this.dialog.modal()) {
       ScrollLock.lock();
     }
 
@@ -96,13 +96,13 @@ export class DialogContentDirective implements OnDestroy {
     this.focusTrap?.deactivate();
     this.focusTrap = null;
 
-    if (this.dialog.modal) {
+    if (this.dialog.modal()) {
       ScrollLock.unlock();
     }
   }
 
   onKeydown(event: KeyboardEvent): void {
-    if (event.key === 'Escape' && this.dialog.closeOnEscape) {
+    if (event.key === 'Escape' && this.dialog.closeOnEscape()) {
       event.stopPropagation(); // Prevent parent dialogs from also closing
       this.dialog.closeDialog();
     }
