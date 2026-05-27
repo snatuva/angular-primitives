@@ -50,6 +50,8 @@
     "@angular/cli": "21.2.7",
     "@angular/compiler-cli": "21.2.8",
     "@angular/platform-browser-dynamic": "21.2.8",
+    "@emnapi/core": "^1.10.0",
+    "@emnapi/runtime": "^1.10.0",
     "@vitest/coverage-v8": "^4.0.8",
     "jsdom": "^27.1.0",
     "ng-packagr": "^21.2.0",
