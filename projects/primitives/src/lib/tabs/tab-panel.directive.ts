@@ -1,4 +1,4 @@
-import { Directive, OnInit, OnDestroy, inject, Input } from '@angular/core';
+import { Directive, OnInit, OnDestroy, inject, input, computed } from '@angular/core';
 import { TabsState } from './tabs.state';
 import { TabPanel } from '@angular/aria/tabs';
 
@@ -8,8 +8,8 @@ import { TabPanel } from '@angular/aria/tabs';
     exportAs: 'apTabPanel',
     host: {
         'role': 'tabpanel',
-        '[attr.aria-labelledby]': '`ap-tab-${ariaPanel.value()}`',
-        '[attr.id]': '`ap-panel-${ariaPanel.value()}`',
+        '[attr.aria-labelledby]': 'ariaLabelledBy()',
+        '[attr.id]': 'panelId()',
         '[style.display]': 'isActive() ? "block" : "none"',
         '[hidden]': '!isActive()'
     },
@@ -24,14 +24,17 @@ export class TabPanelDirective implements OnInit, OnDestroy {
     // 1. Inject the host directive instance
     protected ariaPanel = inject(TabPanel);
 
-    @Input() disabled = false;
+    readonly disabled = input(false);
     private state = inject(TabsState);
+
+    ariaLabelledBy = computed(() => `ap-tab-${this.ariaPanel.value()}`);
+    panelId = computed(() => `ap-panel-${this.ariaPanel.value()}`);
 
     ngOnInit(): void {
         // 2. Use ariaPanel.value (which holds the 'id' passed by the user)
         this.state.register({
             id: this.ariaPanel.value() as string,
-            disabled: this.disabled
+            disabled: this.disabled()
         });
     }
 

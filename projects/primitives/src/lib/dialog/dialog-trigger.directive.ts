@@ -29,7 +29,7 @@ import { DialogDirective } from './dialog.directive';
 export class DialogTriggerDirective {
   private readonly dialog = inject(DialogDirective);
 
-  readonly isOpen = computed(() => this.dialog.isOpen());
+  readonly isOpen = this.dialog.isOpen;
   readonly panelId = computed(() => `${this.dialog.dialogId}-panel`);
 
   onClick(): void {

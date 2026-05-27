@@ -57,10 +57,10 @@ export class AccordionContentDirective implements AfterViewInit {
   readonly dataState = computed(() => this.item.dataState());
 
   /** Panel id — referenced by the trigger's aria-controls */
-  readonly panelId = computed(() => `ap-accordion-panel-${this.item.id}`);
+  readonly panelId = computed(() => `ap-accordion-panel-${this.item.id()}`);
 
   /** Trigger id — referenced by aria-labelledby */
-  readonly triggerId = computed(() => `ap-accordion-trigger-${this.item.id}`);
+  readonly triggerId = computed(() => `ap-accordion-trigger-${this.item.id()}`);
 
   ngAfterViewInit(): void {
     // Nothing extra — all state is reactive via host bindings

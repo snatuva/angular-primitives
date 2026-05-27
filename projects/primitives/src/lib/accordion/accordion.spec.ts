@@ -1,4 +1,4 @@
-import { Component, DebugElement } from '@angular/core';
+import { Component, signal, DebugElement } from '@angular/core';
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 import { By } from '@angular/platform-browser';
 
@@ -20,8 +20,8 @@ import { AccordionContentDirective } from './accordion-content.directive';
     AccordionContentDirective,
   ],
   template: `
-    <div apAccordion [type]="type" [collapsible]="collapsible" [disabled]="disabled">
-      <div apAccordionItem itemId="item-1" [disabled]="item1Disabled">
+    <div apAccordion [type]="type()" [collapsible]="collapsible()" [disabled]="rootDisabled()">
+      <div apAccordionItem itemId="item-1" [disabled]="item1Disabled()">
         <button apAccordionTrigger>Trigger 1</button>
         <div apAccordionContent>Content 1</div>
       </div>
@@ -37,10 +37,10 @@ import { AccordionContentDirective } from './accordion-content.directive';
   `,
 })
 class TestAccordionComponent {
-  type: 'single' | 'multiple' = 'single';
-  collapsible = false;
-  disabled = false;
-  item1Disabled = false;
+  type = signal<'single' | 'multiple'>('single');
+  collapsible = signal(false);
+  rootDisabled = signal(false);
+  item1Disabled = signal(false);
 }
 
 // ---------------------------------------------------------------------------
@@ -159,16 +159,19 @@ describe('AccordionDirective', () => {
     expect(triggers[0].getAttribute('aria-expanded')).toBe('true');
   });
 
-  it('should collapse open item when clicking it again if collapsible=true', () => {
-    component.collapsible = true;
+  it('should collapse open item when clicking it again if collapsible=true', async () => {
+    component.collapsible.set(true);
     fixture.detectChanges();
+    await fixture.whenStable();
 
     const triggers = getTriggers(fixture);
     triggers[0].click();
     fixture.detectChanges();
+    await fixture.whenStable();
 
     triggers[0].click();
     fixture.detectChanges();
+    await fixture.whenStable();
 
     expect(triggers[0].getAttribute('aria-expanded')).toBe('false');
   });
@@ -177,31 +180,37 @@ describe('AccordionDirective', () => {
   // Multiple mode
   // -------------------------------------------------------------------------
 
-  it('should allow multiple items to be open simultaneously in multiple mode', () => {
-    component.type = 'multiple';
+  it('should allow multiple items to be open simultaneously in multiple mode', async () => {
+    component.type.set('multiple');
     fixture.detectChanges();
+    await fixture.whenStable();
 
     const triggers = getTriggers(fixture);
     triggers[0].click();
     fixture.detectChanges();
+    await fixture.whenStable();
     triggers[1].click();
     fixture.detectChanges();
+    await fixture.whenStable();
 
     expect(triggers[0].getAttribute('aria-expanded')).toBe('true');
     expect(triggers[1].getAttribute('aria-expanded')).toBe('true');
   });
 
-  it('should collapse individual items independently in multiple mode', () => {
-    component.type = 'multiple';
+  it('should collapse individual items independently in multiple mode', async () => {
+    component.type.set('multiple');
     fixture.detectChanges();
+    await fixture.whenStable();
 
     const triggers = getTriggers(fixture);
     triggers[0].click();
     triggers[1].click();
     fixture.detectChanges();
+    await fixture.whenStable();
 
     triggers[0].click();
     fixture.detectChanges();
+    await fixture.whenStable();
 
     expect(triggers[0].getAttribute('aria-expanded')).toBe('false');
     expect(triggers[1].getAttribute('aria-expanded')).toBe('true');
@@ -211,33 +220,37 @@ describe('AccordionDirective', () => {
   // Disabled state
   // -------------------------------------------------------------------------
 
-  it('should disable all triggers when root disabled=true', () => {
-    component.disabled = true;
+  it('should disable all triggers when root disabled=true', async () => {
+    component.rootDisabled.set(true);
     fixture.detectChanges();
+    await fixture.whenStable();
 
     getTriggers(fixture).forEach((trigger) =>
-      expect(trigger.disabled).toBeTrue()
+      expect(trigger.disabled).toBe(true)
     );
   });
 
-  it('should not expand an item when root is disabled', () => {
-    component.disabled = true;
+  it('should not expand an item when root is disabled', async () => {
+    component.rootDisabled.set(true);
     fixture.detectChanges();
+    await fixture.whenStable();
 
     const triggers = getTriggers(fixture);
     triggers[0].click();
     fixture.detectChanges();
+    await fixture.whenStable();
 
     expect(triggers[0].getAttribute('aria-expanded')).toBe('false');
   });
 
-  it('should disable only the specified item when item disabled=true', () => {
-    component.item1Disabled = true;
+  it('should disable only the specified item when item disabled=true', async () => {
+    component.item1Disabled.set(true);
     fixture.detectChanges();
+    await fixture.whenStable();
 
     const triggers = getTriggers(fixture);
-    expect(triggers[0].disabled).toBeTrue();
-    expect(triggers[1].disabled).toBeFalse();
+    expect(triggers[0].disabled).toBe(true);
+    expect(triggers[1].disabled).toBe(false);
   });
 
   // -------------------------------------------------------------------------

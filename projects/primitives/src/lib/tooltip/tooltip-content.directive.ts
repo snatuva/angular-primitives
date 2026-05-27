@@ -2,7 +2,7 @@ import {
     Directive,
     TemplateRef,
     inject,
-    Input,
+    input,
     ViewContainerRef,
 } from '@angular/core';
 
@@ -11,7 +11,7 @@ import {
     standalone: true,
 })
 export class TooltipContentDirective {
-    @Input() tooltipId: string = `ap-tooltip-${Math.random().toString(36).substr(2, 9)}`;
+    readonly tooltipId = input(`ap-tooltip-${Math.random().toString(36).substr(2, 9)}`);
 
     public templateRef = inject(TemplateRef);
     public vcr = inject(ViewContainerRef);

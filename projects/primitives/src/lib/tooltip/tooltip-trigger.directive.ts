@@ -2,7 +2,7 @@ import {
     Directive,
     ElementRef,
     inject,
-    Input,
+    input,
 } from '@angular/core';
 import { TooltipState } from './tooltip.state';
 
@@ -25,24 +25,24 @@ export class TooltipTriggerDirective {
     readonly state = inject(TooltipState);
     readonly element = inject(ElementRef<HTMLElement>);
 
-    @Input() showDelay: number = 300;
-    @Input() hideDelay: number = 150;
+    readonly showDelay = input(300);
+    readonly hideDelay = input(150);
 
     private showTimeout?: number;
     private hideTimeout?: number;
 
     onMouseEnter() {
         this.clearTimeouts();
-        this.showTimeout = window.setTimeout(() => {
+        this.showTimeout = setTimeout(() => {
             this.state.openTooltip();
-        }, this.showDelay);
+        }, this.showDelay());
     }
 
     onMouseLeave() {
         this.clearTimeouts();
-        this.hideTimeout = window.setTimeout(() => {
+        this.hideTimeout = setTimeout(() => {
             this.state.closeTooltip();
-        }, this.hideDelay);
+        }, this.hideDelay());
     }
 
     onFocus() {
@@ -52,9 +52,9 @@ export class TooltipTriggerDirective {
 
     onBlur() {
         this.clearTimeouts();
-        this.hideTimeout = window.setTimeout(() => {
+        this.hideTimeout = setTimeout(() => {
             this.state.closeTooltip();
-        }, this.hideDelay);
+        }, this.hideDelay());
     }
 
     onEscape() {

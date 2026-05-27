@@ -1,6 +1,6 @@
 import {
   Directive,
-  Input,
+  input,
   OnInit,
   OnDestroy,
   inject,
@@ -37,19 +37,19 @@ export class AccordionItemDirective implements OnInit, OnDestroy {
    * Unique identifier for this item.
    * Used to associate the trigger and panel via ARIA attributes.
    */
-  @Input({ required: true, alias: 'itemId' }) id!: string;
+  readonly id = input.required<string>({ alias: 'itemId' });
 
   /**
    * Whether this specific item is disabled.
    * The root accordion's `disabled` input also disables all items.
    */
-  @Input() disabled = false;
+  readonly disabled = input(false);
 
   /** Whether this item is currently expanded */
-  readonly isExpanded = computed(() => this.accordion.isExpanded(this.id));
+  readonly isExpanded = computed(() => this.accordion.isExpanded(this.id()));
 
   /** Whether this item is effectively disabled (self or root) */
-  readonly isDisabled = computed(() => this.disabled || this.accordion.disabled);
+  readonly isDisabled = computed(() => this.disabled() || this.accordion.disabled());
 
   /** Data state string for CSS styling hooks */
   readonly dataState = computed(() => (this.isExpanded() ? 'open' : 'closed'));
@@ -62,13 +62,13 @@ export class AccordionItemDirective implements OnInit, OnDestroy {
   ngOnDestroy(): void {
     // Clean up: collapse this item if it's open when destroyed
     if (this.isExpanded()) {
-      this.accordion.collapse(this.id);
+      this.accordion.collapse(this.id());
     }
   }
 
   /** Toggle this item's expanded state */
   toggle(): void {
     if (this.isDisabled()) return;
-    this.accordion.toggle(this.id);
+    this.accordion.toggle(this.id());
   }
 }

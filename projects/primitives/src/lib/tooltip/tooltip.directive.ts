@@ -36,7 +36,7 @@ export class TooltipDirective implements AfterContentInit, OnDestroy {
     ngAfterContentInit() {
         const content = this.contentTemplate();
         if (content) {
-            this.state.setTooltipId(content.tooltipId);
+            this.state.setTooltipId(content.tooltipId());
         }
 
         fromEvent<KeyboardEvent>(this.document, 'keydown')
