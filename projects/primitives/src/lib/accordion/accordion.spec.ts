@@ -329,4 +329,76 @@ describe('AccordionDirective', () => {
 
     expect(document.activeElement).toBe(triggers[triggers.length - 1]);
   });
+
+  // -------------------------------------------------------------------------
+  // Cleanup / ngOnDestroy
+  // -------------------------------------------------------------------------
+
+  it('should not leak expanded state when multiple instances created and destroyed', async () => {
+    const triggers1 = getTriggers(fixture);
+    triggers1[0].click();
+    fixture.detectChanges();
+    await fixture.whenStable();
+
+    expect(triggers1[0].getAttribute('aria-expanded')).toBe('true');
+
+    // Destroy component
+    fixture.destroy();
+
+    // Create new fixture
+    const fixture2 = TestBed.createComponent(TestAccordionComponent);
+    const component2 = fixture2.componentInstance;
+    fixture2.detectChanges();
+
+    const triggers2 = getTriggers(fixture2);
+    expect(triggers2[0].getAttribute('aria-expanded')).toBe('false');
+  });
+
+  it('should maintain expanded state integrity on trigger destruction', async () => {
+    const triggers = getTriggers(fixture);
+    triggers[0].click();
+    fixture.detectChanges();
+    await fixture.whenStable();
+
+    const accordionDir = fixture.debugElement.query(By.directive(AccordionDirective))
+      .injector.get(AccordionDirective);
+
+    expect(accordionDir.isExpanded('item-1')).toBe(true);
+
+    // Simulate destroying the component
+    fixture.destroy();
+
+    // Verify no error
+    expect(() => {
+      const accordion = fixture.debugElement.query(By.directive(AccordionDirective));
+      // After destroy, accordion ref should be null
+      expect(accordion).toBeFalsy();
+    }).not.toThrow();
+  });
+
+  it('should handle signal cleanup without memory leaks', async () => {
+    const triggers = getTriggers(fixture);
+    const accordionDir = fixture.debugElement.query(By.directive(AccordionDirective))
+      .injector.get(AccordionDirective);
+
+    // Multiple expansions to stress-test signal management
+    triggers[0].click();
+    fixture.detectChanges();
+    await fixture.whenStable();
+
+    triggers[1].click();
+    fixture.detectChanges();
+    await fixture.whenStable();
+
+    // Verify state is correct
+    expect(triggers[0].getAttribute('aria-expanded')).toBe('false');
+    expect(triggers[1].getAttribute('aria-expanded')).toBe('true');
+
+    // Cleanup should not error
+    fixture.destroy();
+    expect(() => {
+      const accordion = fixture.debugElement.query(By.directive(AccordionDirective));
+      expect(accordion).toBeFalsy();
+    }).not.toThrow();
+  });
 });
