@@ -3,4 +3,3 @@ export * from './tab-panel.directive';
 export * from './tab-trigger.directive';
 export * from './tab-content.directive';
 export * from './tabs-list.directive';
-export * from './tabs.harness';

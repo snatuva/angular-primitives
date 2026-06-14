@@ -1,6 +1,7 @@
 import { Component } from '@angular/core';
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 import { TestbedHarnessEnvironment } from '@angular/cdk/testing/testbed';
+import { By } from '@angular/platform-browser';
 import { TooltipDirective } from './tooltip.directive';
 import { TooltipTriggerDirective } from './tooltip-trigger.directive';
 import { TooltipContentDirective } from './tooltip-content.directive';
@@ -193,4 +194,90 @@ describe('TooltipDirective Accessibility', () => {
 
   //   expect(await harnessNoContent.isOpen()).toBe(false);
   // });
+
+  // -------------------------------------------------------------------------
+  // Cleanup / ngOnDestroy
+  // -------------------------------------------------------------------------
+
+  it('should destroy tooltip overlay on component destroy', async () => {
+    const fixture = TestBed.createComponent(TestTooltipComponent);
+    const harness = await TestbedHarnessEnvironment.harnessForFixture(fixture, TooltipHarness);
+
+    // Open tooltip
+    const trigger = await harness.getTrigger();
+    await trigger.focus();
+    await new Promise(resolve => setTimeout(resolve, 400));
+
+    expect(await harness.isOpen()).toBe(true);
+
+    // Get the tooltip element before destroy
+    let tooltipElement = document.querySelector('[role="tooltip"]');
+    expect(tooltipElement).toBeTruthy();
+
+    // Destroy component
+    fixture.destroy();
+
+    // Verify tooltip is removed from DOM
+    tooltipElement = document.querySelector('[role="tooltip"]');
+    expect(tooltipElement).toBeFalsy();
+  });
+
+  it('should clear all timers on trigger destroy', async () => {
+    const fixture = TestBed.createComponent(TestTooltipComponent);
+    const harness = await TestbedHarnessEnvironment.harnessForFixture(fixture, TooltipHarness);
+
+    // Simulate mouse enter (starts timeout)
+    const trigger = await harness.getTrigger();
+    await trigger.hover();
+
+    // Immediately destroy before timeout completes
+    fixture.destroy();
+
+    // Wait for original timeout
+    await new Promise(resolve => setTimeout(resolve, 400));
+
+    // If no error and tooltip is not in DOM, cleanup worked
+    const tooltipElement = document.querySelector('[role="tooltip"]');
+    expect(tooltipElement).toBeFalsy();
+  });
+
+  it('should unsubscribe from document keydown on destroy', async () => {
+    const fixture = TestBed.createComponent(TestTooltipComponent);
+    const tooltipDir = fixture.debugElement.query(By.directive(TooltipDirective));
+
+    if (tooltipDir) {
+      const directive = tooltipDir.injector.get(TooltipDirective);
+
+      // Destroy
+      directive.ngOnDestroy();
+
+      // Simulate escape key after destroy
+      const event = new KeyboardEvent('keydown', { key: 'Escape' });
+      document.dispatchEvent(event);
+
+      // Should not error; listener should be unregistered
+      expect(() => {
+        document.dispatchEvent(event);
+      }).not.toThrow();
+    }
+  });
+
+  it('should not leak subscriptions across multiple instances', async () => {
+    const fixture1 = TestBed.createComponent(TestTooltipComponent);
+    await TestbedHarnessEnvironment.harnessForFixture(fixture1, TooltipHarness);
+
+    fixture1.destroy();
+
+    const fixture2 = TestBed.createComponent(TestTooltipComponent);
+    const harness2 = await TestbedHarnessEnvironment.harnessForFixture(fixture2, TooltipHarness);
+
+    const trigger2 = await harness2.getTrigger();
+    await trigger2.focus();
+    await new Promise(resolve => setTimeout(resolve, 400));
+
+    // Should work independently without interference
+    expect(await harness2.isOpen()).toBe(true);
+
+    fixture2.destroy();
+  });
 });

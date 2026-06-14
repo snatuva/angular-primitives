@@ -52,8 +52,8 @@ class TestDialogComponent {
   role = signal<'dialog' | 'alertdialog'>('dialog');
   lastOpenChange: boolean | null = null;
 
-  onOpenChange(v: boolean) { 
-    this.lastOpenChange = v; 
+  onOpenChange(v: boolean) {
+    this.lastOpenChange = v;
     this.controlledOpen.set(v);
   }
 }
@@ -309,5 +309,47 @@ describe('DialogDirective', () => {
 
     expect(getPanel(fixture).getAttribute('data-state')).toBe('open');
     expect(getOverlay(fixture).getAttribute('data-state')).toBe('open');
+  });
+
+  // -------------------------------------------------------------------------
+  // Cleanup / ngOnDestroy
+  // -------------------------------------------------------------------------
+
+  it('should close the dialog on component destroy', async () => {
+    const dialogDir = fixture.debugElement.query(By.directive(DialogDirective))
+      .injector.get(DialogDirective);
+
+    // Open the dialog
+    getTrigger(fixture).click();
+    fixture.detectChanges();
+    await new Promise(r => setTimeout(r, 0));
+    expect(getPanel(fixture).hasAttribute('hidden')).toBe(false);
+
+    // Destroy the directive
+    dialogDir.ngOnDestroy();
+    fixture.detectChanges();
+
+    // Verify dialog closed
+    expect(dialogDir.open()).toBe(false);
+  });
+
+  it('should reset open state to false on destroy if already open', () => {
+    const dialogDir = fixture.debugElement.query(By.directive(DialogDirective))
+      .injector.get(DialogDirective);
+
+    dialogDir.openDialog();
+    expect(dialogDir.open()).toBe(true);
+
+    dialogDir.ngOnDestroy();
+
+    expect(dialogDir.open()).toBe(false);
+  });
+
+  it('should not throw error on destroy if dialog is closed', () => {
+    const dialogDir = fixture.debugElement.query(By.directive(DialogDirective))
+      .injector.get(DialogDirective);
+
+    expect(dialogDir.open()).toBe(false);
+    expect(() => dialogDir.ngOnDestroy()).not.toThrow();
   });
 });
