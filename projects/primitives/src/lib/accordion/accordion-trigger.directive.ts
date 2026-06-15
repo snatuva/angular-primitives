@@ -1,6 +1,5 @@
 import {
   Directive,
-  HostListener,
   inject,
   computed,
   ElementRef,
@@ -12,47 +11,47 @@ import { AccordionDirective } from './accordion.directive';
 /**
  * `apAccordionTrigger`
  *
- * The interactive trigger (button) for an accordion item.
- * Must be a descendant of `apAccordionItem`.
+ * Applied directly to a native `<summary>` element — the disclosure
+ * widget for the parent `<details apAccordionItem>`.
  *
- * Accessibility:
- * - Sets `role="button"` (implicit if applied to <button>)
- * - Manages `aria-expanded` reactively
- * - Sets `aria-controls` to associate with the panel
- * - Sets `aria-disabled` when the item or root is disabled
- * - Implements full keyboard support per WAI-ARIA spec:
- *   - Enter / Space  → toggle
- *   - Arrow Down     → focus next trigger (vertical)
- *   - Arrow Up       → focus previous trigger (vertical)
- *   - Arrow Right    → focus next trigger (horizontal)
- *   - Arrow Left     → focus previous trigger (horizontal)
- *   - Home           → focus first trigger
- *   - End            → focus last trigger
+ * What native `<summary>` gives you automatically:
+ * - Keyboard activation (Enter / Space toggles the parent `<details>`)
+ * - Click toggles the parent `<details>`
+ * - A default disclosure triangle (style via `::marker` / `::-webkit-details-marker`)
+ * - Focusable by default, with a default accessible role
+ *
+ * What this directive adds:
+ * - `aria-expanded` kept in sync with the accordion's expanded state
+ * - `aria-controls` pointing at the associated panel
+ * - `aria-disabled` / disabled-aware keyboard & click handling
+ *   (native `<summary>` has no `disabled` attribute)
+ * - `data-state="open|closed"` for CSS styling hooks
+ * - Roving keyboard navigation across sibling triggers per the
+ *   WAI-ARIA Accordion pattern (ArrowUp/Down/Left/Right, Home, End)
  *
  * @example
- * <button apAccordionTrigger>Toggle Section</button>
+ * <summary apAccordionTrigger>Section 1</summary>
  */
 @Directive({
-  selector: 'button[apAccordionTrigger]',
+  selector: 'summary[apAccordionTrigger]',
   standalone: true,
   exportAs: 'apAccordionTrigger',
   host: {
     '[attr.aria-expanded]': 'isExpanded()',
     '[attr.aria-controls]': 'panelId()',
-    '[attr.aria-disabled]': 'isDisabled()',
+    '[attr.aria-disabled]': 'isDisabled() || null',
+    '[attr.tabindex]': 'isDisabled() ? -1 : null',
     '[attr.data-state]': 'dataState()',
     '[attr.data-disabled]': 'isDisabled() || null',
-    '[disabled]': 'isDisabled()',
-    'id': '',  // Set via computed below
     '[id]': 'triggerId()',
-    '(click)': 'onClick()',
+    '(click)': 'onClick($event)',
     '(keydown)': 'onKeydown($event)',
   },
 })
 export class AccordionTriggerDirective implements AfterViewInit {
   private readonly item = inject(AccordionItemDirective);
   private readonly accordion = inject(AccordionDirective);
-  private readonly el = inject(ElementRef<HTMLButtonElement>);
+  private readonly el = inject(ElementRef<HTMLElement>);
 
   readonly isExpanded = computed(() => this.item.isExpanded());
   readonly isDisabled = computed(() => this.item.isDisabled());
@@ -70,12 +69,23 @@ export class AccordionTriggerDirective implements AfterViewInit {
     this.el.nativeElement.id = this.triggerId();
   }
 
-  onClick(): void {
-    if (this.isDisabled()) return;
-    this.item.toggle();
+  /**
+   * `<summary>` has no `disabled` attribute, so a disabled trigger would
+   * still toggle its `<details>` natively on click. Suppress that here —
+   * `AccordionItemDirective.onToggle` also reverts as a backstop.
+   */
+  onClick(event: MouseEvent): void {
+    if (this.isDisabled()) {
+      event.preventDefault();
+    }
   }
 
   onKeydown(event: KeyboardEvent): void {
+    if (this.isDisabled() && (event.key === 'Enter' || event.key === ' ')) {
+      event.preventDefault();
+      return;
+    }
+
     const isVertical = this.accordion.orientation() === 'vertical';
 
     switch (event.key) {
@@ -130,7 +140,7 @@ export class AccordionTriggerDirective implements AfterViewInit {
 
     const triggers: any = Array.from(
       accordionRoot.querySelectorAll(
-        'button[apAccordionTrigger]:not([disabled])'
+        'summary[apAccordionTrigger]:not([aria-disabled="true"])'
       )
     );
 

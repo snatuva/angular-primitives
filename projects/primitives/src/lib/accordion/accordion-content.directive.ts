@@ -2,8 +2,6 @@ import {
   Directive,
   inject,
   computed,
-  ElementRef,
-  AfterViewInit,
 } from '@angular/core';
 import { AccordionItemDirective } from './accordion-item.directive';
 
@@ -11,14 +9,14 @@ import { AccordionItemDirective } from './accordion-item.directive';
  * `apAccordionContent`
  *
  * The panel region revealed when an accordion item is expanded.
- * Must be a descendant of `apAccordionItem`.
+ * Must be a descendant of `details[apAccordionItem]`, placed after
+ * the `<summary apAccordionTrigger>`.
  *
- * Accessibility:
- * - Sets `role="region"` for landmark navigation
- * - Sets `aria-labelledby` pointing to the associated trigger
- * - Sets `aria-hidden` when collapsed to hide from assistive technology
- * - Sets `hidden` attribute when collapsed (removes from tab order & layout)
- * - Exposes `data-state="open|closed"` for CSS transition hooks
+ * Visibility is handled entirely by the native `<details>` element —
+ * this directive only adds the accessibility wiring on top:
+ * - `role="region"` for landmark navigation
+ * - `aria-labelledby` pointing to the associated trigger
+ * - `data-state="open|closed"` for CSS transition hooks
  *
  * CSS animation:
  * Use `data-state` to drive open/close transitions:
@@ -26,9 +24,6 @@ import { AccordionItemDirective } from './accordion-item.directive';
  * ```css
  * [apAccordionContent][data-state="open"] {
  *   animation: slideDown 200ms ease-out;
- * }
- * [apAccordionContent][data-state="closed"] {
- *   display: none; // or animate out
  * }
  * ```
  *
@@ -44,13 +39,11 @@ import { AccordionItemDirective } from './accordion-item.directive';
   host: {
     'role': 'region',
     '[attr.aria-labelledby]': 'triggerId()',
-    '[attr.aria-hidden]': '!isExpanded()',
-    '[attr.hidden]': '!isExpanded() || null',
     '[attr.data-state]': 'dataState()',
     '[id]': 'panelId()',
   },
 })
-export class AccordionContentDirective implements AfterViewInit {
+export class AccordionContentDirective {
   private readonly item = inject(AccordionItemDirective);
 
   readonly isExpanded = computed(() => this.item.isExpanded());
@@ -61,8 +54,4 @@ export class AccordionContentDirective implements AfterViewInit {
 
   /** Trigger id — referenced by aria-labelledby */
   readonly triggerId = computed(() => `ap-accordion-trigger-${this.item.id()}`);
-
-  ngAfterViewInit(): void {
-    // Nothing extra — all state is reactive via host bindings
-  }
 }
