@@ -243,6 +243,95 @@ Tooltips automatically map `aria-describedby` and attach via Angular CDK Overlay
 
 ---
 
+### Switch
+
+A control that toggles between checked and not checked, built on a native `<input type="checkbox">`.
+
+**Directives**
+
+| Directive | Description | Inputs |
+|---|---|---|
+| `apSwitch` | Applied to `input[type=checkbox]` | `[(checked)]?: boolean` (default: `false`), `disabled?: boolean` |
+
+**Import**
+
+```ts
+import { SwitchDirective } from '@snatuva/primitives';
+```
+
+**Usage**
+
+```html
+<input type="checkbox" apSwitch [(checked)]="airplaneMode" />
+```
+
+`role="switch"`, `aria-checked`, and `data-state="checked|unchecked"` are applied automatically. Keyboard activation (Space) and click come for free from the native checkbox.
+
+---
+
+### Checkbox
+
+A control that allows the user to toggle between checked, unchecked, and indeterminate states.
+
+**Directives**
+
+| Directive | Description | Inputs |
+|---|---|---|
+| `apCheckbox` | Applied to `input[type=checkbox]` | `[(checked)]?: boolean` (default: `false`), `indeterminate?: boolean`, `disabled?: boolean` |
+
+**Import**
+
+```ts
+import { CheckboxDirective } from '@snatuva/primitives';
+```
+
+**Usage**
+
+```html
+<input type="checkbox" apCheckbox [(checked)]="agreed" />
+
+<!-- Indeterminate ("select all") -->
+<input type="checkbox" apCheckbox
+       [checked]="allChecked()"
+       [indeterminate]="someChecked()"
+       (checkedChange)="toggleAll($event)" />
+```
+
+`indeterminate` is a DOM-only property (not an attribute), so the directive applies it imperatively and reflects it via `data-state="indeterminate"`.
+
+---
+
+### Radio Group
+
+A set of checkable buttons — known as radio buttons — where no more than one can be checked at a time.
+
+**Directives**
+
+| Directive | Description | Inputs |
+|---|---|---|
+| `apRadioGroup` | Root state provider | `[(value)]?: string \| null`, `disabled?: boolean`, `orientation?: 'horizontal' \| 'vertical'` (default: `'vertical'`) |
+| `apRadioGroupItem` | Applied to `input[type=radio]` | `value: string` (required), `disabled?: boolean` |
+
+**Import**
+
+```ts
+import { RadioGroupDirective, RadioGroupItemDirective } from '@snatuva/primitives';
+```
+
+**Usage**
+
+```html
+<div apRadioGroup [(value)]="plan">
+  <input type="radio" apRadioGroupItem value="free" />
+  <input type="radio" apRadioGroupItem value="pro" />
+  <input type="radio" apRadioGroupItem value="team" />
+</div>
+```
+
+A shared `name` is generated automatically so the native radios behave as a mutually exclusive set, with `role="radiogroup"`, `data-state`, and group-level `disabled` propagation handled for you.
+
+---
+
 ## Accessibility
 
 Every primitive is built to satisfy ARIA authoring practices out of the box:
@@ -275,13 +364,14 @@ Every primitive is built to satisfy ARIA authoring practices out of the box:
 - [x] Accordion
 - [x] Dialog / Modal
 - [x] Tooltip
+- [x] Select
+- [x] Switch
+- [x] Checkbox & Radio group
+- [x] Documentation site
 - [ ] Popover
-- [ ] Select
-- [ ] Checkbox & Radio group
-- [ ] Toggle / Switch
+- [ ] Combobox / Autocomplete
 - [ ] Accessibility utilities
 - [ ] CDK integrations
-- [ ] Documentation site
 
 ---
 

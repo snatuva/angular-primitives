@@ -21,18 +21,18 @@ import { AccordionContentDirective } from './accordion-content.directive';
   ],
   template: `
     <div apAccordion [type]="type()" [collapsible]="collapsible()" [disabled]="rootDisabled()">
-      <div apAccordionItem itemId="item-1" [disabled]="item1Disabled()">
-        <button apAccordionTrigger>Trigger 1</button>
+      <details apAccordionItem itemId="item-1" [disabled]="item1Disabled()">
+        <summary apAccordionTrigger>Trigger 1</summary>
         <div apAccordionContent>Content 1</div>
-      </div>
-      <div apAccordionItem itemId="item-2">
-        <button apAccordionTrigger>Trigger 2</button>
+      </details>
+      <details apAccordionItem itemId="item-2">
+        <summary apAccordionTrigger>Trigger 2</summary>
         <div apAccordionContent>Content 2</div>
-      </div>
-      <div apAccordionItem itemId="item-3">
-        <button apAccordionTrigger>Trigger 3</button>
+      </details>
+      <details apAccordionItem itemId="item-3">
+        <summary apAccordionTrigger>Trigger 3</summary>
         <div apAccordionContent>Content 3</div>
-      </div>
+      </details>
     </div>
   `,
 })
@@ -47,16 +47,22 @@ class TestAccordionComponent {
 // Helpers
 // ---------------------------------------------------------------------------
 
-function getTriggers(fixture: ComponentFixture<TestAccordionComponent>): HTMLButtonElement[] {
+function getTriggers(fixture: ComponentFixture<TestAccordionComponent>): HTMLElement[] {
   return fixture.debugElement
-    .queryAll(By.css('button[apAccordionTrigger]'))
-    .map((de) => de.nativeElement as HTMLButtonElement);
+    .queryAll(By.css('summary[apAccordionTrigger]'))
+    .map((de) => de.nativeElement as HTMLElement);
 }
 
 function getPanels(fixture: ComponentFixture<TestAccordionComponent>): HTMLElement[] {
   return fixture.debugElement
     .queryAll(By.css('[apAccordionContent]'))
     .map((de) => de.nativeElement as HTMLElement);
+}
+
+function getItems(fixture: ComponentFixture<TestAccordionComponent>): HTMLDetailsElement[] {
+  return fixture.debugElement
+    .queryAll(By.css('details[apAccordionItem]'))
+    .map((de) => de.nativeElement as HTMLDetailsElement);
 }
 
 // ---------------------------------------------------------------------------
@@ -82,10 +88,8 @@ describe('AccordionDirective', () => {
   // -------------------------------------------------------------------------
 
   it('should render with all panels collapsed by default', () => {
-    const panels = getPanels(fixture);
-    panels.forEach((panel) =>
-      expect(panel.getAttribute('aria-hidden')).toBe('true')
-    );
+    const items = getItems(fixture);
+    items.forEach((item) => expect(item.open).toBe(false));
   });
 
   it('should apply data-orientation to the root', () => {
@@ -132,8 +136,8 @@ describe('AccordionDirective', () => {
     fixture.detectChanges();
 
     expect(triggers[0].getAttribute('aria-expanded')).toBe('true');
-    const panels = getPanels(fixture);
-    expect(panels[0].getAttribute('aria-hidden')).toBe('false');
+    const items = getItems(fixture);
+    expect(items[0].open).toBe(true);
   });
 
   it('should collapse the previously open item when another is opened (single mode)', () => {
@@ -225,9 +229,10 @@ describe('AccordionDirective', () => {
     fixture.detectChanges();
     await fixture.whenStable();
 
-    getTriggers(fixture).forEach((trigger) =>
-      expect(trigger.disabled).toBe(true)
-    );
+    getTriggers(fixture).forEach((trigger) => {
+      expect(trigger.getAttribute('aria-disabled')).toBe('true');
+      expect(trigger.getAttribute('tabindex')).toBe('-1');
+    });
   });
 
   it('should not expand an item when root is disabled', async () => {
@@ -249,8 +254,8 @@ describe('AccordionDirective', () => {
     await fixture.whenStable();
 
     const triggers = getTriggers(fixture);
-    expect(triggers[0].disabled).toBe(true);
-    expect(triggers[1].disabled).toBe(false);
+    expect(triggers[0].getAttribute('aria-disabled')).toBe('true');
+    expect(triggers[1].getAttribute('aria-disabled')).toBeNull();
   });
 
   // -------------------------------------------------------------------------
